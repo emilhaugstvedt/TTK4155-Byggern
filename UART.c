@@ -1,3 +1,4 @@
+#define OFFSET 0x1000
 
 #include "UART.h"
 
