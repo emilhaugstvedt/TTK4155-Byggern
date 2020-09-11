@@ -1,5 +1,5 @@
-#define F_CPU 16000000
-#define FOSC 4915200//1843200
+#define F_CPU 4915200
+#define FOSC 4915200
 #define BAUD 9600
 #define MYUBRR FOSC/16/BAUD-1
 
@@ -9,10 +9,16 @@
 
 #include "UART.h"
 #include "SRAM.h"
-
+#include "ADC.h"
 
 
 int main(){
-    //SRAM_init();
-    
+    joystick_t j;
+    SRAM_init();
+    adc_init();
+    string_init(MYUBRR);
+    while(1){
+        adc_joystick(&j);
+        printf("%d\n\r", j.coor.x);
+    }
 }

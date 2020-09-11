@@ -1,10 +1,22 @@
 #include "SRAM.h"
 
+#define BASE_ADDRESS 0x1800
+
 void SRAM_init (void) {
     SFIOR = (1<<XMM2);
     MCUCR = (1<<SRE);
 }
 
+void sram_write(uint8_t  data , uint16_t  addr){
+    volatile  char *ext_mem = (char *)  BASE_ADDRESS;
+    ext_mem[addr]= data;
+    }
+
+uint8_t  sram_read(uint16_t  addr){
+    volatile  char *ext_mem = (char *)  BASE_ADDRESS;
+    uint8_t  ret_val=ext_mem[addr];
+    return  ret_val;
+    }
 
 void SRAM_test(void)
     {
