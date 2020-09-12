@@ -9,16 +9,23 @@
 
 #include "UART.h"
 #include "SRAM.h"
-#include "ADC.h"
+#include "multifunc.h"
 
 
 int main(){
+
+    slider_t s;
     joystick_t j;
     SRAM_init();
     adc_init();
     string_init(MYUBRR);
     while(1){
-        adc_joystick(&j);
-        printf("%d\n\r", j.coor.x);
+        multifunc_slider_get(&s);
+        multifunc_joystick_get(&j);
+        //printf("%d\n\r\t", j.val_y); //inenting
+        //printf("%d\n\r\t", s.right); // ingenting
+        printf("%d\n\r\t", j.val_x); //joystick x
+        //printf("%d\n\r\t", s.left); // Venstre slider
+
     }
 }

@@ -29,13 +29,4 @@ uint8_t  adc_read(){
     return ext_mem[0];
 }
 
-coordinates_t adc_joystick (joystick_t *joy){
-    adc_write(0b10000010);
-    _delay_ms(0.00652);
-    joy->coor.x = adc_read();
-    adc_write(0b10000110);
-    _delay_ms(0.00652);
-    joy->coor.y = adc_read();
-}
-
 
