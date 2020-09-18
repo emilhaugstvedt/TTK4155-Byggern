@@ -10,6 +10,7 @@
 #include "UART.h"
 #include "SRAM.h"
 #include "multifunc.h"
+#include "oled.h"
 
 
 int main(){
@@ -19,13 +20,10 @@ int main(){
     SRAM_init();
     adc_init();
     string_init(MYUBRR);
-    while(1){
-        multifunc_slider_get(&s);
-        multifunc_joystick_get(&j);
-        //printf("%d\n\r\t", j.val_y); //inenting
-        //printf("%d\n\r\t", s.right); // ingenting
-        printf("%d\n\r\t", j.val_x); //joystick x
-        //printf("%d\n\r\t", s.left); // Venstre slider
-
+    oled_init();
+    oled_goto_line(3);
+    oled_column(5);
+    while (1) {
+        oled_write_data(0xA5);
     }
 }

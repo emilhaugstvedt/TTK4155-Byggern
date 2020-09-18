@@ -32,3 +32,5 @@ typedef struct {
 void multifunc_joystick_get(joystick_t *joy);
 
 void multifunc_slider_get (slider_t *slide);
+
+//void multifunc_slider_get_dir(joystick_t *joy){
