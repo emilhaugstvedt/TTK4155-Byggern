@@ -1,4 +1,4 @@
-#include "SRAM.h"
+#include "sram.h"
 
 #define BASE_ADDRESS 0x1800
 

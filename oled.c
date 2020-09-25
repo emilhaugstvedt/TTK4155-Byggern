@@ -1,10 +1,13 @@
 #include "oled.h"
-#include <avr/pgmspace.h>
+#include <stdio.h>
+
+#include "fonts.h"
 
 #define BASE_ADDRESS_COMMAND 0x1000
 volatile  char *ext_mem_oled_c = (char *)  BASE_ADDRESS_COMMAND;
 #define BASE_ADDRESS_DATA 0x1200
 volatile char *ext_mem_oled_d = (char *) BASE_ADDRESS_DATA;
+#define ASCII_OFFSET 32
 
 void oled_init()
 {
@@ -40,41 +43,95 @@ void oled_write_data (uint8_t data) {
     ext_mem_oled_d[0] = data;
 }
 
-
-/*void oled_write_char_8(char c, const unsigned char font, uint8_t page, uint8_t col) {
-    oled_write_command(page + 0xB);
-    oled_write_command(oled_column(col));
-    for (uint8_t i = 0; i++; i < 8) {
-        oled_write_data(font[c - 33][i]);
+void oled_write_char_8(char c, uint8_t line, uint8_t col) {
+    oled_goto_line(line);
+    oled_goto_column(col);
+    for (int i = 0; i < 8; i++) {
+        uint8_t data = (uint8_t)pgm_read_byte(&font8[c - ASCII_OFFSET][i]);
+        oled_write_data(data);
     }
 }
 
-void oled_write_char_5(char c, const unsigned char font, uint8_t page, uint8_t col) {
-    oled_write_command(page + 0xB);
-    oled_write_command(oled_column(col));
-    for (uint8_t i = 0; i++; i < 5) {
-        oled_write_data(font[c - 33][i]);
+void oled_write_char_5(char c, uint8_t line, uint8_t col) {
+    oled_goto_line(line);
+    oled_goto_column(col);
+    for (int i = 0; i < 5; i++) {
+        uint8_t data = (uint8_t)pgm_read_byte(&font5[c - ASCII_OFFSET][i]);
+        oled_write_data(data);
     }
 }
 
-void oled_write_char_4(char c, const unsigned char font, uint8_t page, uint8_t col) {
-    oled_write_command(page + 0xB);
-    oled_write_command(oled_column(col));
-    for (uint8_t i = 0; i++; i < 4) {
-        oled_write_data(font[c - 33][i]);
+void oled_write_char_4(char c, uint8_t line, uint8_t col) {
+    oled_goto_line(line);
+    oled_goto_column(col);
+    for (int i = 0; i < 4; i++) {
+        uint8_t data = (uint8_t)pgm_read_byte(&font4[c - ASCII_OFFSET][i]);
+        oled_write_data(data);
     }
 }
-*/
 
 
-uint8_t oled_column (uint8_t col){
+void oled_goto_column (uint8_t col){
     uint8_t col_LSB = col & 0b00001111;
-    uint8_t col_MSB = (col & 0b11110000) << 4;
-    oled_write_command(0x00 + col_LSB);
+    uint8_t col_MSB = (col & 0b11110000) >> 4;
+    oled_write_command(0x01 + col_LSB);
     oled_write_command(0x10 + col_MSB);
-    //return 0x1000 + col_LSB + col_MSB;
 }
 
-uint8_t oled_goto_line(uint8_t line){
-    oled_write_command(0xb + line);
+void oled_goto_line (uint8_t line){
+    oled_write_command(0xb0 + line);
+}
+
+void oled_clear_line(uint8_t line){
+    oled_goto_line(line);
+    oled_goto_column(0);
+    for (int seg = 0; seg < 128; seg++){
+        oled_write_data(0);
+    }
+}
+
+void oled_reset() {
+    for (int page = 0; page < 8; page++) {
+        oled_goto_line(page);
+        oled_goto_column(0);
+        for (int seg = 0; seg < 128; seg++){
+            oled_write_data(0);
+        }
+    }
+}
+
+void oled_write_string(const char *str, uint8_t line, uint8_t col, uint8_t size) {
+    switch (size) {
+
+        case 8: {
+            int i = 0;
+            while (str[i] != '\0') {
+                oled_write_char_8(str[i], line, col);
+                i++;
+                col = col + 9;
+            }
+            break;
+            }
+        
+        case 5: {
+            int i = 0;
+            while (str[i] != '\0') {
+                oled_write_char_5(str[i], line, col);
+                i++;
+                col = col + 6;
+            }
+            break;
+            }
+
+        case 4: {
+            int i = 0;
+            while (str[i] != '\0') {
+                oled_write_char_4(str[i], line, col);
+                i++;
+                col = col + 5;
+            }
+            break;
+            }
+
+    }
 }

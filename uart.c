@@ -1,6 +1,6 @@
 #define OFFSET 0x1000
 
-#include "UART.h"
+#include "uart.h"
 
 void uart_init(unsigned int ubrr) {
     /* Set baud rate */

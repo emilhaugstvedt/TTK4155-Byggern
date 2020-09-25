@@ -1,7 +1,7 @@
 #include "avr/io.h"
 #include "util/delay.h"
 
-#include "ADC.h"
+#include "adc.h"
 
 typedef enum {
 
@@ -9,7 +9,8 @@ typedef enum {
     RIGHT,
     UP,
     DOWN,
-    NEUTRAL
+    NEUTRAL,
+    UNDEFINED
 
 } direction_t;
 
@@ -29,8 +30,10 @@ typedef struct {
 
 } slider_t;
 
-void multifunc_joystick_get(joystick_t *joy);
+void multifunc_joy_get(joystick_t *joy);
 
 void multifunc_slider_get (slider_t *slide);
 
-//void multifunc_slider_get_dir(joystick_t *joy){
+void multifunc_joy_get_dir(joystick_t *joy);
+
+uint8_t multifunc_joy_button_get();
