@@ -13,6 +13,9 @@ uint8_t mcp2515_init() {
         return 1;
     }
 
+    spi_write(MCP_CANCTRL);
+    spi_write(0x20);
+    spi_write()
 
 
     return 0;
