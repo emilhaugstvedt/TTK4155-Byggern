@@ -27,7 +27,7 @@ typedef struct menu_t {
 } menu_t;
 
 
-void menu_init(menu_t *m, node_t *node);
+void menu_init();
 
 void menu_write(menu_t *m);
 

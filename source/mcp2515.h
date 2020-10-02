@@ -73,6 +73,16 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_TX01_MASK	0x14
 #define MCP_TX_MASK		0x54
 
+#define MCP_TXB0SIDH    0x31
+#define MCP_TXB0SIDL    0x32
+#define MCP_TXB0DLC     0x35
+#define MCP_TXB0D0      0x36
+
+#define MCP_RXB0SIDH    0x61
+#define MCP_RXB0SIDL    0x62
+#define MCP_RXB0DLC     0x65
+#define MCP_RXB0D0      0x66
+
 // Define SPI Instruction Set
 
 #define MCP_WRITE		0x02
@@ -153,3 +163,17 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_WAKIF		0x40
 #define MCP_MERRF		0x80
 
+
+uint8_t mcp2515_init();
+
+void mcp2515_reset();
+
+char mcp2515_read(uint8_t address);
+
+void mcp2515_write(uint8_t address, char data);
+
+void mcp2515_bit_modify(uint8_t address, uint8_t mask, uint8_t data);
+
+uint8_t mcp2515_read_status();
+
+#endif

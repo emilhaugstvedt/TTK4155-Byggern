@@ -1,7 +1,6 @@
 #include "menu.h"
 
-void menu_init(menu_t *m, node_t *node) {
-    m->current_choice = node;
+void menu_init() {
     oled_init();
     oled_reset();
 
@@ -47,6 +46,8 @@ void menu_add_node(menu_t *m, node_t* node, char *node_name) {
     node->number_of_children = 0;
     node->name = node_name;
     if(m->number_of_nodes > 0){
+        m->nodes[0]->prev = node;
+        m->nodes[m->number_of_nodes - 1]->next = node;
         node->next = m->nodes[0];
         node->prev = m->nodes[m->number_of_nodes-1];
         m->nodes[m->number_of_nodes] = node;
@@ -64,6 +65,8 @@ void menu_add_node(menu_t *m, node_t* node, char *node_name) {
 void menu_add_subnode(node_t *parent, node_t *sub, char* sub_node_name) {
     sub->name = sub_node_name;
     if(parent->number_of_children > 0){
+        parent->children[0] -> prev = sub;
+        parent->children[number_of_children - 1] -> next = sub;
         sub->next = parent->children[0];
         sub->prev = parent->children[parent->number_of_children-1];
         parent->children[parent->number_of_children] = sub;

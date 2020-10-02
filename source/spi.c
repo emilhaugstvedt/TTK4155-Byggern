@@ -9,23 +9,29 @@ void spi_master_init(void){
     SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
 }
 
-void spi_send(char data) {
-    PORTB &= ~(1 << PB4);
-    spi_master_transmit(data);
-    PORTB |= (1 << PB4);
-}
-
-char spi_read() {
-    /*PORTB = PORTB & (0b11110111);
-    spi_master_transmit(0xFF);
-    PORTB = PORTB | (1 << PB4); */
-    return SPDR;
-}
-
 void spi_master_transmit(char data){
     /* Start transmission */
     SPDR = data;
     
     /* Wait for transmission complete */
     while(!(SPSR & (1<<SPIF)));
+}
+
+void spi_master_receive() {
+
+    spi_master_transmit(0xaa);
+
+    return SPDR;
+}
+
+void spi_set_CS(uint8_t value) {
+    switch (value) {
+        case 1:
+            PORTB |= (1 << PB4);
+            break;
+        
+        case 0:
+            PORTB &= ~(1 << PB4);
+            break;
+    }
 }

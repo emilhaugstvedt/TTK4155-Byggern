@@ -46,7 +46,7 @@ void multifunc_joy_get_dir(joystick_t *joy){
         joy->dir_y = DOWN;
         printf("0");
     }
-    if (joy->val_y < 170 && joy->val_y > 90) {
+    if (joy->val_y < 160 && joy->val_y > 100) {
         joy->dir_y = NEUTRAL;
     }
     else {

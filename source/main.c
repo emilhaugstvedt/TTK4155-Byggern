@@ -10,7 +10,7 @@
 #include "uart.h"
 #include "sram.h"
 #include "menu.h"
-#include "spi.h"
+#include "can_driver.h"
 
 
 int main(){
@@ -20,17 +20,25 @@ int main(){
     adc_init();
     string_init(MYUBRR);
     adc_init();
-    oled_init();
-    oled_reset();
 
-    spi_master_init();
-        while(1) {
-        spi_send('b');
-        char c = spi_read();
-        printf("%c",c);
-    }
+    /*can_init();
 
-    /*menu_t m;
+    can_msg_t receive;
+
+    can_msg_t msg;
+    msg.id = 3;
+    msg.data[0] = 'a';
+    msg.data[1] = 'b';
+    msg.data[2] = 'c';
+    msg.length = 3;
+
+    can_send(&msg);
+    receive = can_receive();
+
+    printf("%c %c %c\n\r", receive.data[0],receive.data[1], receive.data[2]); */
+    menu_init();
+
+    menu_t m;  
 
     node_t game;
     node_t settings;
@@ -39,32 +47,11 @@ int main(){
     menu_add_node(&m, &game, "GAME");
     menu_add_node(&m, &settings, "SETTINGS");
     menu_add_node(&m, &highscore, "HIGHSCORE");
+
     
-
-
-    /* node_t brightness;
-    node_t volume;
-    node_t difficulity;
-
-    settings.children[0]= &brightness;
-    brightness.prev = &difficulity;
-    brightness.next = &volume;
-    game.name = "BRIGHTNESS";
-
-    settings.children[1]= &volume;
-    brightness.prev = &brightness;
-    brightness.next = &difficulity;
-    game.name = "VOLUME";
-
-    settings.children[2]= &volume;
-    brightness.prev = &difficulity;
-    brightness.next = &brightness;
-    game.name = "DIFFICULITY"; 
-
-    menu_init(&m, &game);
 
     menu_write(&m);
 
-    menu_fsm(&m, &j); */
+    menu_fsm(&m, &j);
 
 }
