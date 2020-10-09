@@ -61,21 +61,3 @@ void menu_add_node(menu_t *m, node_t* node, char *node_name) {
         m->number_of_nodes++;
     }
 }
-
-void menu_add_subnode(node_t *parent, node_t *sub, char* sub_node_name) {
-    sub->name = sub_node_name;
-    if(parent->number_of_children > 0){
-        parent->children[0] -> prev = sub;
-        parent->children[number_of_children - 1] -> next = sub;
-        sub->next = parent->children[0];
-        sub->prev = parent->children[parent->number_of_children-1];
-        parent->children[parent->number_of_children] = sub;
-        parent->number_of_children++;
-    }
-    if(parent->number_of_children == 0) {
-        parent->children[parent->number_of_children] = sub;
-        sub->next = sub;
-        sub->prev = sub;
-        parent->number_of_children++;
-    }
-}

@@ -19,8 +19,6 @@ int main()
 
    CAN_MESSAGE msg;
    can_receive(&msg, 3);
-   for (int i = 0; i < msg.data_length; i++) {
-       printf("%c\r\n", msg.data[i]);
-   }
+   printf("%c %c %c\n\r", msg.data[0],msg.data[1], msg.data[2]);
     
 }
