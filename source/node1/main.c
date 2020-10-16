@@ -23,15 +23,25 @@ int main(){
     can_msg_t receive;
     can_msg_t msg;
     msg.id = 3;
-    msg.data[0] = 'a';
-    msg.data[1] = 'b';
-    msg.data[2] = 'c';
-    msg.length = 3;
-    while (1){
-        can_send(&msg); 
+    while(1){
+        multifunc_joy_get(&j);
+        multifunc_joy_get_dir(&j);
+        msg.data[0] = j.dir_x;
+        msg.data[1] = j.dir_y;
+        msg.data[2] = j.val_x;
+        msg.data[3] = j.val_y;
+        msg.length = 4;
+       can_send(&msg);
+//    msg.id = 3;
+//    msg.data[0] = 'a';
+//    msg.data[1] = 'b';
+//    msg.data[2] = 'c';
+//    msg.length = 3;
+//    while(1) {
+//    can_send(&msg);
     }
-}
 
+}
 /*
 Bruke eksempelet fra databladet, bare med 16 kHz i stedet for 20 kHz. 
 Node2 har klokkefrekvens 84 mHz. Bit rate må være lik på begge noder, og

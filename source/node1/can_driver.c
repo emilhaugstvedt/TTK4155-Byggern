@@ -2,22 +2,18 @@
 #include "can_driver.h"
 #include "util/delay.h"
 
+
 void can_init() {
     mcp2515_init();
 
-    mcp2515_bit_modify(MCP_CNF1, 0b10111111, 0);
+    //Setting the right baud rate prescaler for TQ=125kHz
+    mcp2515_write(MCP_CNF1, 0x03);
+    
+    mcp2515_write(MCP_CNF2, 0b10110001);
 
-    mcp2515_bit_modify(MCP_CNF1, 0b01000000, 1);
+    mcp2515_write(MCP_CNF3, 0b00000101);
 
-    mcp2515_bit_modify(MCP_CNF3, 0b11111001, 0);
-
-    mcp2515_bit_modify(MCP_CNF3, 0b00000110, 1);
-
-    mcp2515_bit_modify(MCP_CNF2, 0b01111101, 0);
-
-    mcp2515_bit_modify(MCP_CNF2, 0b10000010, 1);
-
-    mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+   mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
     uint8_t value;
     value = mcp2515_read(MCP_CANSTAT);
@@ -26,9 +22,9 @@ void can_init() {
         return 1;
     }
 
-    mcp2515_bit_modify(MCP_CANINTE, 0b00000011, MCP_RX_INT);
-
-    mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
+    //interrupt_enable()
+    //masker inn et ett-tall for å sette opp et flagg
+    //mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 1);
 
 }
 
@@ -42,12 +38,13 @@ void can_send(can_msg_t * msg) {
         mcp2515_write(MCP_TXB0D0 + i, msg->data[i]);
     }
     mcp2515_rts(0);
+    
 }
 
 
 can_msg_t can_receive() {
     can_msg_t msg;
-    msg.id = mcp2515_read(MCP_RXB0SIDH) >> 3 +  mcp2515_read(MCP_RXB0SIDH) >> CAN_ID_OFFSET ;
+    msg.id = mcp2515_read(MCP_RXB0SIDH) >> 3 +  mcp2515_read(MCP_RXB0SIDL) >> CAN_ID_OFFSET ;
     msg.length = mcp2515_read(MCP_RXB0DLC);
 
     for (int i = 0; i < msg.length; i++) {
@@ -57,4 +54,16 @@ can_msg_t can_receive() {
     mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
     return msg;
 
+}
+
+//void interrupt_enable (){
+//    //når den blir satt til en skal vi handle et interrupt 
+//    mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IE, MCP_RX0IE);
+//    
+//}
+
+void interrupt_handler(){
+
+    //tar ned flagget
+    mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
 }

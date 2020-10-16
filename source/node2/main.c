@@ -7,18 +7,22 @@
 #include "can_controller.h"̈́
 #include "can_interrupt.h"
 
+#define CAN_BR_PRESET 0x00290165
 
 int main()
 {
-
-    printf("flashed");
    SystemInit();
    WDT->WDT_MR = WDT_MR_WDDIS; //Disable Watchdog Timer
    configure_uart();
-   can_init(16000, 4, 4);
+   can_init_def_tx_rx_mb(CAN_BR_PRESET);
 
+   printf("flashed");
    CAN_MESSAGE msg;
-   can_receive(&msg, 3);
-   printf("%c %c %c\n\r", msg.data[0],msg.data[1], msg.data[2]);
-    
+   //while(1) {
+   while (1){
+     if(!(can_receive(&msg, 0))){
+      printf("%d %d %d %d \n\r", msg.data[0], msg.data[1], msg.data[2], msg.data[3]);
+     }
+
+   }
 }
