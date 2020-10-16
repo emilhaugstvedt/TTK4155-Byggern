@@ -169,6 +169,12 @@ Copyright 2003 Kimberly Otten Software Consulting
  * 
  * @return uint8_t 
  */
+// RXBnCTRL
+
+#define MCP_RXM0		0X20
+#define MCP_RXM1		0X40
+
+
 uint8_t mcp2515_init();
 
 /**

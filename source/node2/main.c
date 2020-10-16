@@ -20,7 +20,7 @@ int main()
    CAN_MESSAGE msg;
    while (1){
      if(!(can_receive(&msg, 0))){
-      printf("%d %d %d %d \n\r", msg.data[0], msg.data[1], msg.data[2], msg.data[3]);
+      printf("%d %d \n\r", msg.data[0], msg.data[1]);
      }
    }
 }

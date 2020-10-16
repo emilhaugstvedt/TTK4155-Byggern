@@ -39,3 +39,7 @@ void can_send(can_msg_t *msg);
  * @return can_msg_t 
  */
 can_msg_t can_receive();
+can_msg_t can_receive();
+
+void interrupt_handler();
+

@@ -28,7 +28,7 @@ void can_init() {
         return 1;
     }
 
-    //interrupt_enable()
+    //interrupt_enable();
     //masker inn et ett-tall for å sette opp et flagg
     //mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 1);
 
@@ -65,11 +65,17 @@ can_msg_t can_receive() {
         msg.data[i] = mcp2515_read(MCP_RXB0D0 + i);
     }
 
+<<<<<<< HEAD
     //Removing the recieve flag from the interrupt register. 
     mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
+=======
+    mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
+    mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
+>>>>>>> 231a2dcb569090984d56825386dcb81f3666339a
     return msg;
 }
 
+<<<<<<< HEAD
 void interrupt_enable () {
 
     //Turns on the interrupt
@@ -81,4 +87,18 @@ void interrupt_handler(){
 
     //Removes the interrupt flag
     mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
+=======
+void can_IRS_enable (){
+    //når den blir satt til en skal vi handle et interrupt 
+    mcp2515_bit_modify(MCP_CANINTE, 0b001, 0b001);
+    
+}
+
+void can_IRS(){
+    can_msg_t msg = can_receive();
+    for (int i; i < msg.length; i++) {
+        printf("%d", msg.data[i]);
+    }
+    printf("\n");
+>>>>>>> 231a2dcb569090984d56825386dcb81f3666339a
 }

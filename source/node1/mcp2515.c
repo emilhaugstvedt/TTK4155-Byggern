@@ -23,6 +23,9 @@ uint8_t mcp2515_init() {
         printf("MCP2515 is NOT in configuration mode after reset!\n");
         return 1;
     }
+
+    // recieve all messages
+    mcp2515_write(MCP_RXB0CTRL, MCP_RXM1 | MCP_RXM0);
 }
 
 
