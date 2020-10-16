@@ -13,3 +13,6 @@ void can_init();
 void can_send(can_msg_t *msg);
 
 can_msg_t can_receive();
+
+void interrupt_handler();
+

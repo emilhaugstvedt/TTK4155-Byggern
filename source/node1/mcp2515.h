@@ -163,6 +163,11 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_WAKIF		0x40
 #define MCP_MERRF		0x80
 
+// RXBnCTRL
+
+#define MCP_RXM0		0X20
+#define MCP_RXM1		0X40
+
 
 uint8_t mcp2515_init();
 

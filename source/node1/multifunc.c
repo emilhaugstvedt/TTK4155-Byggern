@@ -54,7 +54,8 @@ void multifunc_joy_get_dir(joystick_t *joy){
     }
 }
 
- uint8_t multifunc_joy_button_get() {
+
+uint8_t multifunc_joy_button_get() {
     DDRD &= ~(1 << PIND3);
     return PIND & (1 << PIND3);
 }
