@@ -1,0 +1,101 @@
+\hypertarget{mcp2515_8c}{}\doxysection{source/node1/mcp2515.c File Reference}
+\label{mcp2515_8c}\index{source/node1/mcp2515.c@{source/node1/mcp2515.c}}
+
+
+A file containing the functions for operating the M\+C\+P2515.  
+
+
+{\ttfamily \#include \char`\"{}mcp2515.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{mcp2515_8c_a4d334547c295f440175a2c84b99e8383}{mcp2515\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Function that initialize the M\+CP. The spi\+\_\+master\+\_\+intit() is needed because the avr communicates with the M\+CP through S\+PI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mcp2515_8c_ae5bb16b0c928ff03914f4022b56ef15a}{mcp2515\+\_\+reset}} ()
+\begin{DoxyCompactList}\small\item\em Function for reseting the M\+CP. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mcp2515_8c_a442247932839a9dcb374dba78e204910}{mcp2515\+\_\+write}} (uint8\+\_\+t address, char data)
+\begin{DoxyCompactList}\small\item\em Function for writing from the avr to an address on the M\+CP. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{mcp2515_8c_a7f3f6f87997d81851071f301c1ec9821}\label{mcp2515_8c_a7f3f6f87997d81851071f301c1ec9821}} 
+char {\bfseries mcp2515\+\_\+read} (uint8\+\_\+t address)
+\item 
+\mbox{\Hypertarget{mcp2515_8c_aecfbe19c4d682c1adfd8e817cf92345a}\label{mcp2515_8c_aecfbe19c4d682c1adfd8e817cf92345a}} 
+void {\bfseries mcp2515\+\_\+rts} (uint8\+\_\+t value)
+\item 
+\mbox{\Hypertarget{mcp2515_8c_afe162e26baee5181db3a7883932c83de}\label{mcp2515_8c_afe162e26baee5181db3a7883932c83de}} 
+void {\bfseries mcp2515\+\_\+bit\+\_\+modify} (uint8\+\_\+t address, uint8\+\_\+t mask, uint8\+\_\+t data)
+\item 
+\mbox{\Hypertarget{mcp2515_8c_ab997c2db10d764d8581e416146e57a7a}\label{mcp2515_8c_ab997c2db10d764d8581e416146e57a7a}} 
+uint8\+\_\+t {\bfseries mcp2515\+\_\+read\+\_\+status} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A file containing the functions for operating the M\+C\+P2515. 
+
+\begin{DoxyAuthor}{Author}
+Emil Johannesen Haugsvtedt (\href{mailto:emiljha@stud.ntnu.no}{\texttt{ emiljha@stud.\+ntnu.\+no}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2020-\/10-\/16
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2020 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mcp2515_8c_a4d334547c295f440175a2c84b99e8383}\label{mcp2515_8c_a4d334547c295f440175a2c84b99e8383}} 
+\index{mcp2515.c@{mcp2515.c}!mcp2515\_init@{mcp2515\_init}}
+\index{mcp2515\_init@{mcp2515\_init}!mcp2515.c@{mcp2515.c}}
+\doxysubsubsection{\texorpdfstring{mcp2515\_init()}{mcp2515\_init()}}
+{\footnotesize\ttfamily uint8\+\_\+t mcp2515\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that initialize the M\+CP. The spi\+\_\+master\+\_\+intit() is needed because the avr communicates with the M\+CP through S\+PI. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file mcp2515.\+c.
+
+\mbox{\Hypertarget{mcp2515_8c_ae5bb16b0c928ff03914f4022b56ef15a}\label{mcp2515_8c_ae5bb16b0c928ff03914f4022b56ef15a}} 
+\index{mcp2515.c@{mcp2515.c}!mcp2515\_reset@{mcp2515\_reset}}
+\index{mcp2515\_reset@{mcp2515\_reset}!mcp2515.c@{mcp2515.c}}
+\doxysubsubsection{\texorpdfstring{mcp2515\_reset()}{mcp2515\_reset()}}
+{\footnotesize\ttfamily void mcp2515\+\_\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function for reseting the M\+CP. 
+
+
+
+Definition at line 39 of file mcp2515.\+c.
+
+\mbox{\Hypertarget{mcp2515_8c_a442247932839a9dcb374dba78e204910}\label{mcp2515_8c_a442247932839a9dcb374dba78e204910}} 
+\index{mcp2515.c@{mcp2515.c}!mcp2515\_write@{mcp2515\_write}}
+\index{mcp2515\_write@{mcp2515\_write}!mcp2515.c@{mcp2515.c}}
+\doxysubsubsection{\texorpdfstring{mcp2515\_write()}{mcp2515\_write()}}
+{\footnotesize\ttfamily void mcp2515\+\_\+write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address,  }\item[{char}]{data }\end{DoxyParamCaption})}
+
+
+
+Function for writing from the avr to an address on the M\+CP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & A adress on the M\+CP \\
+\hline
+{\em data} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 51 of file mcp2515.\+c.
+

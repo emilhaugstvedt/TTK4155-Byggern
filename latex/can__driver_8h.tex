@@ -1,0 +1,73 @@
+\hypertarget{can__driver_8h}{}\doxysection{source/node1/can\+\_\+driver.h File Reference}
+\label{can__driver_8h}\index{source/node1/can\_driver.h@{source/node1/can\_driver.h}}
+
+
+File that contains functions for initializing C\+AN communication between the different nodes.  
+
+
+{\ttfamily \#include \char`\"{}mcp2515.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcan__msg__t}{can\+\_\+msg\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struct used to send and recieve messages in C\+AN. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{can__driver_8h_aeff35a2fc6fe28202fde554e4e021c51}\label{can__driver_8h_aeff35a2fc6fe28202fde554e4e021c51}} 
+\#define {\bfseries C\+A\+N\+\_\+\+I\+D\+\_\+\+O\+F\+F\+S\+ET}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{can__driver_8h_a1619e4e36842ab2508b1a3c18cb60ae3}\label{can__driver_8h_a1619e4e36842ab2508b1a3c18cb60ae3}} 
+void \mbox{\hyperlink{can__driver_8h_a1619e4e36842ab2508b1a3c18cb60ae3}{can\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Function for initialiazing the can communication in node 1. This init function follows the initialization from the example in the data sheet. The only difference is that our clock frequency is 16 M\+Hz instead of 20 M\+Hz, thus the B\+RP is 3 instead of 4. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{can__driver_8h_a6e0be313e69bbf46fc18bf6ccf14bfa2}{can\+\_\+send}} (\mbox{\hyperlink{structcan__msg__t}{can\+\_\+msg\+\_\+t}} $\ast$msg)
+\begin{DoxyCompactList}\small\item\em Function for sending a msg struct over C\+AN. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structcan__msg__t}{can\+\_\+msg\+\_\+t}} \mbox{\hyperlink{can__driver_8h_ab4c481191ced4c15593cc72bbc4cd7f7}{can\+\_\+receive}} ()
+\begin{DoxyCompactList}\small\item\em Function for recieveing a message over C\+AN. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File that contains functions for initializing C\+AN communication between the different nodes. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{can__driver_8h_ab4c481191ced4c15593cc72bbc4cd7f7}\label{can__driver_8h_ab4c481191ced4c15593cc72bbc4cd7f7}} 
+\index{can\_driver.h@{can\_driver.h}!can\_receive@{can\_receive}}
+\index{can\_receive@{can\_receive}!can\_driver.h@{can\_driver.h}}
+\doxysubsubsection{\texorpdfstring{can\_receive()}{can\_receive()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg__t}{can\+\_\+msg\+\_\+t}} can\+\_\+receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function for recieveing a message over C\+AN. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structcan__msg__t}{can\+\_\+msg\+\_\+t}} 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file can\+\_\+driver.\+c.
+
+\mbox{\Hypertarget{can__driver_8h_a6e0be313e69bbf46fc18bf6ccf14bfa2}\label{can__driver_8h_a6e0be313e69bbf46fc18bf6ccf14bfa2}} 
+\index{can\_driver.h@{can\_driver.h}!can\_send@{can\_send}}
+\index{can\_send@{can\_send}!can\_driver.h@{can\_driver.h}}
+\doxysubsubsection{\texorpdfstring{can\_send()}{can\_send()}}
+{\footnotesize\ttfamily void can\+\_\+send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg__t}{can\+\_\+msg\+\_\+t}} $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+Function for sending a msg struct over C\+AN. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & A struct which contains all the information needed to transfer a message over C\+AN. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file can\+\_\+driver.\+c.
+

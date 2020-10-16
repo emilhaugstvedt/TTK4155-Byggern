@@ -1,0 +1,62 @@
+\hypertarget{adc_8h}{}\doxysection{source/node1/adc.h File Reference}
+\label{adc_8h}\index{source/node1/adc.h@{source/node1/adc.h}}
+
+
+This file contains functions for initialiazing and read/write to anf from the adc.  
+
+
+{\ttfamily \#include \char`\"{}avr/io.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{adc_8h_a1e942fcd91f79d49e4ddb8d7e9d3ef95}\label{adc_8h_a1e942fcd91f79d49e4ddb8d7e9d3ef95}} 
+void \mbox{\hyperlink{adc_8h_a1e942fcd91f79d49e4ddb8d7e9d3ef95}{adc\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Function for initializing the adc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{adc_8h_a952fe56d09ce32144007a2f35bfef0b3}{adc\+\_\+write}} (uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Function that writes data to the adc from the avr. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{adc_8h_a4d11e2ba1881ff02d6d92e284b7b3725}{adc\+\_\+read}} ()
+\begin{DoxyCompactList}\small\item\em Function that reads from the adc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains functions for initialiazing and read/write to anf from the adc. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{adc_8h_a4d11e2ba1881ff02d6d92e284b7b3725}\label{adc_8h_a4d11e2ba1881ff02d6d92e284b7b3725}} 
+\index{adc.h@{adc.h}!adc\_read@{adc\_read}}
+\index{adc\_read@{adc\_read}!adc.h@{adc.h}}
+\doxysubsubsection{\texorpdfstring{adc\_read()}{adc\_read()}}
+{\footnotesize\ttfamily uint8\+\_\+t adc\+\_\+read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function that reads from the adc. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+
+
+Definition at line 27 of file adc.\+c.
+
+\mbox{\Hypertarget{adc_8h_a952fe56d09ce32144007a2f35bfef0b3}\label{adc_8h_a952fe56d09ce32144007a2f35bfef0b3}} 
+\index{adc.h@{adc.h}!adc\_write@{adc\_write}}
+\index{adc\_write@{adc\_write}!adc.h@{adc.h}}
+\doxysubsubsection{\texorpdfstring{adc\_write()}{adc\_write()}}
+{\footnotesize\ttfamily void adc\+\_\+write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Function that writes data to the adc from the avr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file adc.\+c.
+

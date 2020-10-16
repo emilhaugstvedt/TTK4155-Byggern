@@ -1,9 +1,9 @@
 #include "menu.h"
 
+
 void menu_init() {
     oled_init();
     oled_reset();
-
 }
 
 void menu_write(menu_t *m) {

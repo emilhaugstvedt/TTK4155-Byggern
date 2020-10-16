@@ -6,6 +6,7 @@
 #include "avr/io.h"
 #include "stdio.h"
 #include <stdlib.h>
+#include <avr/interrupt.h>
 
 #include "uart_driver.h"
 #include "sram.h"
@@ -40,11 +41,9 @@ int main(){
 //    while(1) {
 //    can_send(&msg);
     }
-
 }
-/*
-Bruke eksempelet fra databladet, bare med 16 kHz i stedet for 20 kHz. 
-Node2 har klokkefrekvens 84 mHz. Bit rate må være lik på begge noder, og
-helst også antall quanta pr. melding. Vi må altså finne hvilken verdier
-i de forskjellige registrene i de forskjellige nodene som gir lik bit rate.
-*/
+
+//Putte inn riktig interrupt-vektor i denne funksjonen her.
+ISR() {
+    can_receive(&msg);
+}

@@ -163,9 +163,18 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_WAKIF		0x40
 #define MCP_MERRF		0x80
 
-
+/**
+ * @brief Function that initialize the MCP. 
+ * The spi_master_intit() is needed because the avr communicates with the MCP through SPI. 
+ * 
+ * @return uint8_t 
+ */
 uint8_t mcp2515_init();
 
+/**
+ * @brief Reset function for the MCP
+ * 
+ */
 void mcp2515_reset();
 
 char mcp2515_read(uint8_t address);

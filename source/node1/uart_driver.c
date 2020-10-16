@@ -22,7 +22,7 @@ void uart_transmit (unsigned char data) {
     UDR0 = data;
 }
 
-unsigned char uart_recieve (void) {
+unsigned char uart_receieve (void) {
     while (!(UCSR0A & (1 << RXC0)));
     return UDR0;
 }

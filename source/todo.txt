@@ -1,0 +1,9 @@
+Meny og joystick:
++ Lage en funksjon som leser av knappen til joysticken.
++ Fikse ADC-en slik at vi får ut alle verdiene vi vil. 
++ Finne en god måte å skrive forskjellige bokstavstørrelser til skjermen. Skal vi ha det som det er?
+Eller skal vi lage én funksjon hvor vi kan velge størrelse?
++ Lage en mye mer oversiktlig lenket liste til menyen. 
+
+CAN:
++ Klare å sende meldinger begge veier. 
