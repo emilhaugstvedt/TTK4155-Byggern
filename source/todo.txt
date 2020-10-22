@@ -7,3 +7,12 @@ Eller skal vi lage én funksjon hvor vi kan velge størrelse?
 
 CAN:
 + Klare å sende meldinger begge veier. 
+
+Notes Fred+Maja 22.10:
+- datatypene til lengdeattributten(?) til messageobjektene har vært ulike, derfor får vi ikke til å printe fra node 1 til 2
+- har satt opp for å sende fra node 2 til 1
+- send og mottaksfunksjonen er satt opp feil, det skal ikke hardkodes. interruptet skal kalles uoppfordret
+? finne ut hva som er transmitbuffre
+- for å få printet ut bokstaver og ikke ascii må vi bare endre i printfunksjonen fra %d til %c
+- recievefunksjonen i node to er satt opp slik at den tar info ut av en postboks og setter det sammen til et meldingsobjekt. Deretter kalles interruptet når det er funnet noe i mailboksen. Handleren er den som printer dataen i meldingen
+- har begynt på en lignede struktur i can_recieve i node 1, hvor vi tilegner data til meldingsobjektet samtidig som vi printer ut. denne funksjonaliteten kan senere deles. lager en "dum" funksjon som senere kan gjøres om til handler
