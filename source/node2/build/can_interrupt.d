@@ -72,5 +72,5 @@ build/can_interrupt.o: can_interrupt.c can_interrupt.h \
  sam/sam3x/include/instance/instance_wdt.h \
  sam/sam3x/include/instance/instance_rtc.h \
  sam/sam3x/include/instance/instance_gpbr.h \
- sam/sam3x/include/pio/pio_sam3x8e.h \
- sam/../uart_and_printf/printf-stdarg.h can_controller.h
+ sam/sam3x/include/pio/pio_sam3x8e.h uart_and_printf/printf-stdarg.h \
+ can_controller.h

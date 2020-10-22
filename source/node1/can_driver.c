@@ -56,49 +56,30 @@ void can_send(can_msg_t * msg) {
 }
 
 
-can_msg_t can_receive() {
-    can_msg_t msg;
+void can_receive(can_msg_t *msg) {
     //Extracting the relevant values from the receive registers of the MCP. 
-    msg.id = mcp2515_read(MCP_RXB0SIDH) >> 3 +  mcp2515_read(MCP_RXB0SIDL) >> CAN_ID_OFFSET ;
-    msg.length = mcp2515_read(MCP_RXB0DLC);
-    for (int i = 0; i < msg.length; i++) {
-        msg.data[i] = mcp2515_read(MCP_RXB0D0 + i);
+    msg->id = mcp2515_read(MCP_RXB0SIDH) >> 3 +  mcp2515_read(MCP_RXB0SIDL) >> CAN_ID_OFFSET ;
+    msg->length = mcp2515_read(MCP_RXB0DLC);
+    printf("%d \n", msg->id);
+    for (int i = 0; i < msg->length; i++) {
+        msg->data[i] = mcp2515_read(MCP_RXB0D0 + i);
     }
 
-<<<<<<< HEAD
-    //Removing the recieve flag from the interrupt register. 
-    mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
-=======
-    mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
-    mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
->>>>>>> 231a2dcb569090984d56825386dcb81f3666339a
-    return msg;
+    //Flag for interrupt
+    //mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
+    //mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
 }
 
-<<<<<<< HEAD
-void interrupt_enable () {
-
-    //Turns on the interrupt
-    mcp2515_bit_modify(MCP_CANINTE, MCP_RX0IE, MCP_RX0IE);
-    
-}
-
-void interrupt_handler(){
-
-    //Removes the interrupt flag
-    mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
-=======
 void can_IRS_enable (){
     //når den blir satt til en skal vi handle et interrupt 
     mcp2515_bit_modify(MCP_CANINTE, 0b001, 0b001);
     
 }
 
-void can_IRS(){
-    can_msg_t msg = can_receive();
-    for (int i; i < msg.length; i++) {
-        printf("%d", msg.data[i]);
-    }
-    printf("\n");
->>>>>>> 231a2dcb569090984d56825386dcb81f3666339a
-}
+//void can_IRS(){
+//    can_msg_t msg = can_receive();
+//    for (int i; i < msg.length; i++) {
+//        printf("%d", msg.data[i]);
+//    }
+//    printf("\n");
+//}

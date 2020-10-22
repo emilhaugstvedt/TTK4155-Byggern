@@ -17,7 +17,7 @@
 typedef struct can_message_t
 {
 	uint16_t id;
-	char data_length;
+	uint8_t data_length;
 	char data[8];
 } CAN_MESSAGE;
 

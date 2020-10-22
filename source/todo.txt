@@ -7,3 +7,7 @@ Eller skal vi lage én funksjon hvor vi kan velge størrelse?
 
 CAN:
 + Klare å sende meldinger begge veier. 
+
+
+- spesifiser hvilken mailboks vi skal lese i fra i node 1.
+mailboks 0 og 1 i node 1 tilsvarer ikke mailboks 0 og 1 i node 2. Disse er uavhengig av hverandre.

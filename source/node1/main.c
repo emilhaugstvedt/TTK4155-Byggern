@@ -22,28 +22,35 @@ int main(){
     string_init(MYUBRR);
 
     can_init();
-    can_msg_t receive;
+
+    can_msg_t msg;
+    can_receive(&msg);
+
+    //------------------------------------------------------------
+    /*
     can_msg_t msg;
     msg.id = 3;
-    while(1){
-        multifunc_joy_get(&j);
-        multifunc_joy_get_dir(&j);
-        msg.data[0] = j.val_x;
-        msg.data[1] = j.val_y;
+    //while(1){
+    //    multifunc_joy_get(&j);
+    //    multifunc_joy_get_dir(&j);
+    //    msg.data[0] = j.val_x;
+    //    msg.data[1] = j.val_y;
         //msg.data[2] = 0;
         //msg.data[3] = 0;
         //msg.data[4] = 0;
         //msg.data[5] = 0;
-        msg.length = 2;
+        //msg.length = 2;
+        //can_send(&msg);
+    msg.data[0] = 'a';
+    msg.data[1] = 'b';
+    msg.data[2] = 'c';
+    msg.length = 3;
+    while(1) {
         can_send(&msg);
-//    msg.id = 3;
-//    msg.data[0] = 'a';
-//    msg.data[1] = 'b';
-//    msg.data[2] = 'c';
-//    msg.length = 3;
-//    while(1) {
-//    can_send(&msg);
     }
+    */
+    //------------------------------------------------------------
+
 }
 
 

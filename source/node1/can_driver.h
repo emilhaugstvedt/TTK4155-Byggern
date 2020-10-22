@@ -6,6 +6,7 @@
 
 
 #include "mcp2515.h"
+#include <stdio.h>
 
 #define CAN_ID_OFFSET 5
 /**
@@ -38,8 +39,7 @@ void can_send(can_msg_t *msg);
  * 
  * @return can_msg_t 
  */
-can_msg_t can_receive();
-can_msg_t can_receive();
+void can_receive(can_msg_t *msg);
 
 void interrupt_handler();
 

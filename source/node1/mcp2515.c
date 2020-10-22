@@ -25,7 +25,7 @@ uint8_t mcp2515_init() {
     }
 
     // recieve all messages
-    mcp2515_write(MCP_RXB0CTRL, MCP_RXM1 | MCP_RXM0);
+    // mcp2515_write(MCP_RXB0CTRL, MCP_RXM1 | MCP_RXM0);
 }
 
 
