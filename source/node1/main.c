@@ -46,7 +46,9 @@ int main(){
     }
 }
 
+
+/*
 //Putte inn riktig interrupt-vektor i denne funksjonen her.
 ISR() {
     can_receive(&msg);
-}
+}*/

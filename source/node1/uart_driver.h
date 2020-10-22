@@ -10,8 +10,7 @@ void uart_transmit (unsigned char data);
  * 
  * @return unsigned char 
  */
-unsigned char uart_receieve (void);
-
+unsigned char uart_receive (void);
 /**
  * @brief Function that initialize the printf function for node 1.
  * 

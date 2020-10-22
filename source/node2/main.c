@@ -16,6 +16,7 @@ int main()
    configure_uart();
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
 
+
    printf("flashed");
    CAN_MESSAGE msg;
    while (1){

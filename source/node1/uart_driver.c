@@ -22,12 +22,12 @@ void uart_transmit (unsigned char data) {
     UDR0 = data;
 }
 
-unsigned char uart_receieve (void) {
+unsigned char uart_receive (void) {
     while (!(UCSR0A & (1 << RXC0)));
     return UDR0;
 }
 
 void string_init(unsigned int ubrr) {
     uart_init(ubrr);
-    fdevopen(uart_transmit, uart_recieve);
+    fdevopen(uart_transmit, uart_receive);
 }
