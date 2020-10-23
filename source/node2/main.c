@@ -6,6 +6,7 @@
 #include "sam.h"
 #include "can_controller.h"̈́
 #include "can_interrupt.h"
+#include "pwm_driver.h"
 
 #define CAN_BR_PRESET 0x00290165
 
@@ -16,21 +17,24 @@ int main()
    configure_uart();
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
 
-   CAN_MESSAGE msg;
-   msg.id = 3;
-   msg.data_length = 3;
-   msg.data[0] = 'a';
-   msg.data[1] = 'b';
-   msg.data[2] = 'c';
-   can_send(&msg, 0);
-  /*
+
+  //  CAN_MESSAGE msg;
+  //  msg.id = 3;
+  //  msg.data_length = 2;
+  //  msg.data[0] = 'a';
+  //  msg.data[1] = 'b';
+  //  while(1) {
+  //    can_send(&msg, 0);
+  //  }
+
+/*
    printf("flashed");
    while (1){
      ;
    }
-   */
+  
 
-
+*/
 
    
 }

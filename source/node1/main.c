@@ -6,12 +6,13 @@
 #include "avr/io.h"
 #include "stdio.h"
 #include <stdlib.h>
-#include <avr/interrupt.h>
+
 
 #include "uart_driver.h"
 #include "sram.h"
 #include "menu.h"
 #include "can_driver.h"
+
 
 
 int main(){
@@ -21,13 +22,27 @@ int main(){
     adc_init();
     string_init(MYUBRR);
 
+    printf("flashed");
+
+    can_IRS_enable();
+
+    // DDRB |= 1 << PB1;
+    // while (1)
+    // {
+    // PORTB &= ~(1 << PB1);
+    //  _delay_ms(100);
+    //  PORTB |= 1 << PB1;
+    //  _delay_ms(100);
+    // }
+
     can_init();
 
-    can_msg_t msg;
-    can_receive(&msg);
 
+//    while (1){
+//     ;
+//    }
     //------------------------------------------------------------
-    /*
+/*
     can_msg_t msg;
     msg.id = 3;
     //while(1){
@@ -48,7 +63,7 @@ int main(){
     while(1) {
         can_send(&msg);
     }
-    */
+*/
     //------------------------------------------------------------
 
 }
@@ -59,3 +74,4 @@ int main(){
 ISR() {
     can_receive(&msg);
 }*/
+

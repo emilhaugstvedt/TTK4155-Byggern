@@ -26,6 +26,10 @@ uint8_t mcp2515_init() {
 
     // recieve all messages
     // mcp2515_write(MCP_RXB0CTRL, MCP_RXM1 | MCP_RXM0);
+
+    mcp2515_bit_modify(MCP_CANINTE, 0b00000001, 1);
+    mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 0);
+
 }
 
 

@@ -2,6 +2,8 @@
 #include "can_driver.h"
 #include "util/delay.h"
 
+#include <avr/interrupt.h>
+
 #define CAN_BRP 0x03
 
 
@@ -32,6 +34,8 @@ void can_init() {
     //masker inn et ett-tall for å sette opp et flagg
     //mcp2515_bit_modify(MCP_CANINTF, 0b00000001, 1);
 
+    
+
 }
 
 void can_send(can_msg_t * msg) {
@@ -52,7 +56,12 @@ void can_send(can_msg_t * msg) {
     }
 
     //Requesting the MCP to send the message. 
-    mcp2515_rts(0);   
+    mcp2515_rts(0);    cli();
+    
+    DDRD = 1 << DDD2;
+    GICR = 1 << INT0;
+
+    sei();
 }
 
 
@@ -60,26 +69,42 @@ void can_receive(can_msg_t *msg) {
     //Extracting the relevant values from the receive registers of the MCP. 
     msg->id = mcp2515_read(MCP_RXB0SIDH) >> 3 +  mcp2515_read(MCP_RXB0SIDL) >> CAN_ID_OFFSET ;
     msg->length = mcp2515_read(MCP_RXB0DLC);
-    printf("%d \n", msg->id);
     for (int i = 0; i < msg->length; i++) {
         msg->data[i] = mcp2515_read(MCP_RXB0D0 + i);
     }
 
     //Flag for interrupt
-    //mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
-    //mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
-}
-
-void can_IRS_enable (){
-    //når den blir satt til en skal vi handle et interrupt 
-    mcp2515_bit_modify(MCP_CANINTE, 0b001, 0b001);
+    mcp2515_bit_modify(MCP_CANINTF, 0b01, 0);
     
 }
 
-//void can_IRS(){
-//    can_msg_t msg = can_receive();
-//    for (int i; i < msg.length; i++) {
-//        printf("%d", msg.data[i]);
-//    }
-//    printf("\n");
-//}
+
+void print_message(can_msg_t *msg) {
+    printf("%d \n", msg->id);
+    for(int i = 0; i < msg->length; i++) {
+        printf("%c \n", msg->data[i]);
+    }
+}
+
+void can_IRS_enable(){
+    DDRD &= ~(1 << PD2);
+    cli();
+
+    GICR |= (1 << INT0);
+    MCUCR |= ( 1 << ISC01);
+    MCUCR &= ~(1 << ISC00);
+
+    sei();
+}
+
+
+
+
+
+ISR(INT0_vect) {
+    can_msg_t msg;
+    can_receive(&msg);
+    print_message(&msg);
+}
+
+ISR(BADISR_vect){}
