@@ -16,7 +16,15 @@ int main()
    WDT->WDT_MR = WDT_MR_WDDIS; //Disable Watchdog Timer
    configure_uart();
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
-
+   pwm_init();
+   
+   printf("flashed");
+   pwm_set_duty_cycle(50.0f);
+   printf("flashed2");
+  
+   while (1){
+     ;
+   }
 
   //  CAN_MESSAGE msg;
   //  msg.id = 3;
@@ -27,14 +35,6 @@ int main()
   //    can_send(&msg, 0);
   //  }
 
-/*
-   printf("flashed");
-   while (1){
-     ;
-   }
-  
-
-*/
 
    
 }

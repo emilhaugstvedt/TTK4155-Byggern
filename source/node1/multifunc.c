@@ -8,11 +8,11 @@
 void multifunc_joy_get (joystick_t *joy){
     adc_write(0b10000001); //Riktig
     _delay_ms(WAIT);
-    joy->val_x = adc_read();
+    joy->val_x = (adc_read()*SCALE_X);
     _delay_ms(WAIT);
     adc_write(0b10000000);
     _delay_ms(WAIT);
-    joy->val_y = adc_read();
+    joy->val_y = (adc_read()*SCALE_Y);
     _delay_ms(WAIT);
 }
 

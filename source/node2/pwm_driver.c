@@ -1,49 +1,44 @@
 #include "pwm_driver.h"
-#include "sam/sam3x/include/sam.h"
+#include "./sam/sam3x/include/sam.h"
 
-#define RC 0xCD140
-#define PMC_KEY 0x504D4300
+#define RC_20MS 840000
+#define RA_MID  42000
 
 
 
 void pwm_init(void)
 {
+    
+    PMC -> PMC_PCER0 = (1 << ID_TC0);
+    //PMC -> PMC_PCER0 = (1 << PIO_PB25B_TIOA0);
 
-    PIOC -> PIO_PDR |= PIO_PDR_P18;
+    PIOB -> PIO_PDR |= PIO_PDR_P25;
+    PIOB -> PIO_ABSR |= PIO_PB25B_TIOA0;
 
-    PIOC ->PIO_ABSR |= PIO_ABSR_P18;
+    /*
+    PIOB -> PIO_PDR |= 1 << PIO_PDR_P25;
+    PIOB -> PIO_ABSR |= PIO_PDR_P25;//1 << PIO_PB25B_TIOA0;
+    */
 
-    PMC -> PMC_PCER1 |= PMC_PCER1_PID36;
+    TC0 -> TC_CHANNEL[0].TC_CMR = TC_CMR_WAVE;
+    TC0 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_TCCLKS_TIMER_CLOCK1;
+    TC0 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_WAVSEL_UP_RC;
+    TC0 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_ACPC_SET;
+    TC0 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_ACPA_CLEAR;
 
-    PWM -> PWM_CLK = PWM_CLK_PREA(0) | PWM_CLK_DIVA(42);
+    TC0 -> TC_CHANNEL[0].TC_RC = RC_20MS;
+    TC0 -> TC_CHANNEL[0].TC_RA = RA_MID;
 
-    PWM -> PWM_CH_NUM[6].PWM_CMR = PWM_CMR_CALG | PWM_CMR_CPRE_CLKA;
-
-    PWM -> PWM_CH_NUM[6].PWM_CPRD = CHANNEL_DUTY_CYCLE_MAX;
-
-    PWM -> PWM_ENA |= PWM_ENA_CHID6;
-
-    pwm_set_duty_cycle(SERVO_MID_POINT_DUTY_CYCLE);
-
-    //PMC -> PMC_WPMR |= PMC_KEY;
-
-    //PMC -> PMC_PCER0 |= 1 << ID_TC0;
-
-    //PIOB -> PIO_PDR |= 1 << 25;
-    //
-    //PIOB -> PIO_ABSR |= 1 << 25;
-//
-//    TC0 -> TC_CHANNEL[0].TC_CMR |= 0x9C000;
-//
-    //TC0 -> TC_CHANNEL[0].TC_RA |= 42000;
-//
-    //TC0 -> TC_CHANNEL[0].TC_RC |= RC;
-//
-    //TC0 -> TC_CHANNEL[0].TC_CCR  |= 0x1;
-//
+    TC0 -> TC_CHANNEL[0].TC_IER = TC_IER_CPAS | TC_IER_CPCS;
+    TC0 -> TC_CHANNEL[0].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG;
 }
 
 void pwm_set_duty_cycle(float percent) {
-    uint32_t duty_cycle = (uint32_t)(CHANNEL_DUTY_CYCLE_MAX * ((100.0f - percent)));
-    PWM->PWM_CH_NUM[6].PWM_CDTY = duty_cycle;
+    uint32_t duty_cycle = DUTY_CYCLE_INTERCEPT + DUTY_CYCLE_SLPE*percent;
+    TC0->TC_CHANNEL[0].TC_RA = duty_cycle;
+}
+
+void TC0_Handler(void) {
+    uint32_t status;
+    status = TC0 ->TC_CHANNEL[0].TC_SR;
 }
