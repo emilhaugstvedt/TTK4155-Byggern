@@ -17,3 +17,6 @@ Notes Fred+Maja 22.10:
 - recievefunksjonen i node to er satt opp slik at den tar info ut av en postboks og setter det sammen til et meldingsobjekt. Deretter kalles interruptet når det er funnet noe i mailboksen. Handleren er den som printer dataen i meldingen
 - har begynt på en lignede struktur i can_recieve i node 1, hvor vi tilegner data til meldingsobjektet samtidig som vi printer ut. denne funksjonaliteten kan senere deles. lager en "dum" funksjon som senere kan gjøres om til handler
 - - spesifiser hvilken mailboks vi skal lese i fra i node 1. Mailboks 0 og 1 i node 1 tilsvarer ikke mailboks 0 og 1 i node 2. Disse er uavhengig av hverandre.
+
+SERVO + IR:
+- utbedre følsomhet på servoen når den styres til siden.
