@@ -37,3 +37,5 @@ void multifunc_slider_get (slider_t *slide);
 void multifunc_joy_get_dir(joystick_t *joy);
 
 uint8_t multifunc_joy_button_get();
+
+//void multifunc_joy_filter(joystick_t *joy_filter);

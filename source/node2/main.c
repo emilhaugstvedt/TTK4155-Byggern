@@ -7,6 +7,7 @@
 #include "can_controller.h"̈́
 #include "can_interrupt.h"
 #include "pwm_driver.h"
+#include "game.h"
 
 #define CAN_BR_PRESET 0x00290165
 
@@ -16,25 +17,12 @@ int main()
    WDT->WDT_MR = WDT_MR_WDDIS; //Disable Watchdog Timer
    configure_uart();
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
-   pwm_init();
+   //pwm_init();
+   adc_init();
+   //timer_init();
+   timer_systick_init();
    
-   printf("flashed");
-   pwm_set_duty_cycle(50.0f);
-   printf("flashed2");
-  
+   printf("init");
    while (1){
-     ;
    }
-
-  //  CAN_MESSAGE msg;
-  //  msg.id = 3;
-  //  msg.data_length = 2;
-  //  msg.data[0] = 'a';
-  //  msg.data[1] = 'b';
-  //  while(1) {
-  //    can_send(&msg, 0);
-  //  }
-
-
-   
 }

@@ -3,7 +3,6 @@
 * @brief This file contains functions for initialiazing and read/write to anf from the adc.
 */
 
-
 #include "avr/io.h"
 
 /**

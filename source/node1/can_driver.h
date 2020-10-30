@@ -5,7 +5,6 @@
  */
 
 
-#include "mcp2515.h"
 #include <stdio.h>
 
 #define CAN_ID_OFFSET 5

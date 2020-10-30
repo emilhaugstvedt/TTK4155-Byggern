@@ -11,21 +11,30 @@
 #include "uart_driver.h"
 #include "sram.h"
 #include "menu.h"
-#include "can_driver.h"
+
 
 
 
 int main(){
-    slider_t s;
-    joystick_t j;
+
+    //--------------------init------------------------
     SRAM_init();
     adc_init();
     string_init(MYUBRR);
-
-    printf("flashed");
-
     can_IRS_enable();
+    can_init();
+    //-----------------------------------------------
 
+    printf("initialized");
+
+    
+    joystick_t joy;
+    joy.val_x = 128;
+    joy.val_y = 128;
+    while (1) {
+        printf("%d %d \n\r", joy.val_x, joy.val_y);
+        servo_send(&joy);
+    }
     // DDRB |= 1 << PB1;
     // while (1)
     // {
@@ -35,7 +44,6 @@ int main(){
     //  _delay_ms(100);
     // }
 
-    can_init();
 
 
 //    while (1){
@@ -67,11 +75,4 @@ int main(){
     //------------------------------------------------------------
 
 }
-
-
-/*
-//Putte inn riktig interrupt-vektor i denne funksjonen her.
-ISR() {
-    can_receive(&msg);
-}*/
 

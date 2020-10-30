@@ -56,12 +56,7 @@ void can_send(can_msg_t * msg) {
     }
 
     //Requesting the MCP to send the message. 
-    mcp2515_rts(0);    cli();
-    
-    DDRD = 1 << DDD2;
-    GICR = 1 << INT0;
-
-    sei();
+    mcp2515_rts(0); 
 }
 
 

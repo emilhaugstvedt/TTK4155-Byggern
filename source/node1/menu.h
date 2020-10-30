@@ -1,5 +1,5 @@
 #include "oled.h"
-#include "multifunc.h"
+#include "hardware_driver.h"
 
 /**
  * @brief Struct that contains everything important for the linked list making the menu.

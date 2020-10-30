@@ -4454,7 +4454,7 @@ void arm_rfft_fast_f32(
     q7_t *pState;                 /**< points to the state buffer array. The array is of length maxDelay+blockSize-1. */
     q7_t *pCoeffs;                /**< points to the coefficient array. The array is of length numTaps.*/
     uint16_t maxDelay;            /**< maximum offset specified by the pTapDelay array. */
-    int32_t *pTapDelay;           /**< points to the array of delay values.  The array is of length numTaps. */
+    int32_t *pTap;           /**< points to the array of delay values.  The array is of length numTaps. */
   } arm_fir_sparse_instance_q7;
 
 

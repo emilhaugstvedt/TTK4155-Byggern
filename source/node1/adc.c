@@ -28,5 +28,3 @@ uint8_t  adc_read(){
     volatile  char *ext_mem = (char *)  BASE_ADDRESS;
     return ext_mem[0];
 }
-
-

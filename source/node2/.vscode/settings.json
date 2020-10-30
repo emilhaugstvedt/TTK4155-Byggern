@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "hardware_driver.h": "c",
+        "pwm_driver.h": "c",
+        "can_controller.h": "c"
+    }
+}

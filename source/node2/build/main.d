@@ -74,4 +74,5 @@ build/main.o: main.c uart_and_printf/uart.h \
  sam/sam3x/include/instance/instance_rtc.h \
  sam/sam3x/include/instance/instance_gpbr.h \
  sam/sam3x/include/pio/pio_sam3x8e.h can_controller.h can_interrupt.h \
- pwm_driver.h
+ pwm_driver.h timer.h sam/sam3x/include/sam.h sam/sam3x/include/sam3x8e.h \
+ game.h
