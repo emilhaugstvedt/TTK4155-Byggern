@@ -23,18 +23,54 @@ int main(){
     string_init(MYUBRR);
     can_IRS_enable();
     can_init();
+    menu_init();
     //-----------------------------------------------
+    joystick_t joy;
+    joy.dir_x = NEUTRAL;
+    joy.dir_y = NEUTRAL;
+
+    menu_t m;
+    node_t game = menu_new_node("GAME");
+    node_t settings = menu_new_node("SETTINGS");
+    node_t highscore = menu_new_node("HIGHSCORE");
+    node_t songs = menu_new_node("PLAY A SONG");
+
+    menu_add_node(&m, &game);
+    menu_add_node(&m, &settings);
+    menu_add_node(&m, &highscore);
+    menu_add_node(&m, &songs);
+
+    node_t songs_ole_brum =menu_new_node("OLE BRUM");
+    node_t songs_bae_bae = menu_new_node("BAE BAE LILLE LAM");
+    node_t songs_tenke_sjael = menu_new_node("TENKE SJAEL");
+
+    node_t settings_brightness = menu_new_node("BRIGHTNESS");
+    node_t settings_difficulity = menu_new_node("DIFFICULITY");
+    node_t settings_volume = menu_new_node("VOLUME");
+
+    menu_add_sub_node(&settings, &settings_brightness);
+    menu_add_sub_node(&settings, &settings_volume);
+    menu_add_sub_node(&settings, &settings_difficulity);
+
+    menu_add_sub_node(&songs, &songs_ole_brum);
+    menu_add_sub_node(&songs, &songs_tenke_sjael);
+    menu_add_sub_node(&songs, &songs_bae_bae);
+
+
+    menu_write(&m);
+    menu_fsm(&m, &joy);
+
 
     printf("initialized");
 
     
-    joystick_t joy;
-    joy.val_x = 128;
-    joy.val_y = 128;
-    while (1) {
-        printf("%d %d \n\r", joy.val_x, joy.val_y);
-        servo_send(&joy);
-    }
+    //joystick_t joy;
+    //joy.val_x = 128;
+    //joy.val_y = 128;
+    //while (1) {
+    //    printf("%d %d \n\r", joy.val_x, joy.val_y);
+    //    servo_send(&joy);
+    //}
     // DDRB |= 1 << PB1;
     // while (1)
     // {

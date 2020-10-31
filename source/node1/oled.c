@@ -90,6 +90,11 @@ void oled_clear_line(uint8_t line){
     }
 }
 
+void oled_update_line(const char *str, uint8_t line, uint8_t col, uint8_t size) {
+    oled_clear_line(line);
+    oled_write_string(str, line, col, size);
+}
+
 void oled_reset() {
     for (int page = 0; page < 8; page++) {
         oled_goto_line(page);
@@ -108,7 +113,7 @@ void oled_write_string(const char *str, uint8_t line, uint8_t col, uint8_t size)
             while (str[i] != '\0') {
                 oled_write_char_8(str[i], line, col);
                 i++;
-                col = col + 9;
+                col = col + 10;
             }
             break;
             }
@@ -118,7 +123,7 @@ void oled_write_string(const char *str, uint8_t line, uint8_t col, uint8_t size)
             while (str[i] != '\0') {
                 oled_write_char_5(str[i], line, col);
                 i++;
-                col = col + 6;
+                col = col + 7;
             }
             break;
             }
@@ -128,7 +133,7 @@ void oled_write_string(const char *str, uint8_t line, uint8_t col, uint8_t size)
             while (str[i] != '\0') {
                 oled_write_char_4(str[i], line, col);
                 i++;
-                col = col + 5;
+                col = col + 6;
             }
             break;
             }

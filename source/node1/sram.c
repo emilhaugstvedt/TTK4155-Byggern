@@ -3,8 +3,8 @@
 #define BASE_ADDRESS 0x1800
 
 void SRAM_init (void) {
-    SFIOR = (1<<XMM2);
-    MCUCR = (1<<SRE);
+    SFIOR |= (1<<XMM2);
+    MCUCR |= (1<<SRE);
 }
 
 void sram_write(uint8_t  data , uint16_t  addr){

@@ -14,8 +14,7 @@ typedef struct node_t{
     
     struct node_t *parent;
     uint8_t number_of_children;
-    struct node_t *children[4];
-
+    struct node_t *children[8];
 
 } node_t;
 
@@ -42,5 +41,12 @@ void menu_init();
 
 void menu_write(menu_t *m);
 
-void menu_add_node(menu_t *m, node_t* node, char *node_name);
+void menu_add_node(menu_t *m, node_t* node);
 
+void menu_fsm(menu_t *m, joystick_t *joy);
+
+node_t menu_new_node();
+
+void menu_update(menu_t *m);
+
+void menu_add_sub_node(node_t *parent, node_t *sub_node);

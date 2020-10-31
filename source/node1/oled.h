@@ -21,3 +21,5 @@ void oled_reset();
 void oled_clear_line(uint8_t line);
 
 void oled_write_string(const char *str, uint8_t line, uint8_t col, uint8_t size);
+
+void oled_update_line(const char *str, uint8_t line, uint8_t col, uint8_t size);
