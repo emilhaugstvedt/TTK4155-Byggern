@@ -11,6 +11,11 @@
 void timer_systick_init () {
     SysTick -> CTRL &= ~(SysTick_CTRL_CLKSOURCE_Msk);
     SysTick -> CTRL |= SysTick_CTRL_ENABLE_Msk;
+
+    SysTick -> LOAD = 10500;
+
+    SysTick -> VAL = 0;
+
     NVIC_EnableIRQ(SysTick_IRQn);
 }
 
