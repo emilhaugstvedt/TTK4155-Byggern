@@ -8,6 +8,9 @@
 
 #define RC_1MS 105000
 
+
+// Kanskje denne kan brukes: SysTick_Config(10500);
+
 void timer_systick_init () {
     SysTick -> CTRL &= ~(SysTick_CTRL_CLKSOURCE_Msk);
     SysTick -> CTRL |= SysTick_CTRL_ENABLE_Msk;
