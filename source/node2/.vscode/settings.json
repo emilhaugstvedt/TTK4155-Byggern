@@ -2,6 +2,10 @@
     "files.associations": {
         "hardware_driver.h": "c",
         "pwm_driver.h": "c",
-        "can_controller.h": "c"
+        "can_controller.h": "c",
+        "game.h": "c",
+        "msg_handler.h": "c",
+        "sam.h": "c",
+        "utilities.h": "c"
     }
 }

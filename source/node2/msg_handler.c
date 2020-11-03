@@ -1,12 +1,17 @@
 #include "msg_handler.h"
-#include "hardware_driver.h"
+#include "utilities.h"
 
-#define SERVO_ID 2
+
+#define MSG_ID 2
+
+#define SERVO_DATA 0
+#define MOTOR_DATA 1
 
 
 void msg_handler(CAN_MESSAGE msg) {
-    if (msg.id == SERVO_ID) {
-        servo_driver(msg);
-        printf("%d \n\r",msg.data[0]);
+    if (msg.id == MSG_ID) {
+        util_servo_driver(msg.data[SERVO_DATA]);
+        util_motor_driver(msg.data[MOTOR_DATA]);
+        printf("%d %d \n\r", msg.data[0], msg.data[1]);
     }
 }

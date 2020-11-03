@@ -25,7 +25,14 @@ int main(){
     can_init();
     menu_init();
     //-----------------------------------------------
-    joystick_t joy;
+
+
+
+
+
+
+
+    /*joystick_t joy;
     joy.dir_x = NEUTRAL;
     joy.dir_y = NEUTRAL;
 
@@ -58,27 +65,17 @@ int main(){
 
 
     menu_write(&m);
-    menu_fsm(&m, &joy);
-
-
-    printf("initialized");
+    menu_fsm(&m, &joy);*/
 
     
-    //joystick_t joy;
-    //joy.val_x = 128;
-    //joy.val_y = 128;
-    //while (1) {
-    //    printf("%d %d \n\r", joy.val_x, joy.val_y);
-    //    servo_send(&joy);
-    //}
-    // DDRB |= 1 << PB1;
-    // while (1)
-    // {
-    // PORTB &= ~(1 << PB1);
-    //  _delay_ms(100);
-    //  PORTB |= 1 << PB1;
-    //  _delay_ms(100);
-    // }
+    joystick_t joy;
+    slider_t slider;
+    joy.val_x = 128;
+    joy.val_y = 128;
+    while (1) {
+        printf("%d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left);
+        hardware_send(&joy, &slider);
+    }
 
 
 

@@ -1,21 +1,19 @@
-#include "./sam/sam3x/include/sam.h"
+#include "sam.h"
 #include "timer.h"
+
+#include <stdint.h>
 
 #define RC_20MS 840000
 #define RA_MID  63000
 #define RA_MIN 37800
 #define RA_MAX 88200
 
-#define RC_1MS 105000
-
-
-// Kanskje denne kan brukes: SysTick_Config(10500);
 
 void timer_systick_init () {
-    SysTick -> CTRL &= ~(SysTick_CTRL_CLKSOURCE_Msk);
-    SysTick -> CTRL |= SysTick_CTRL_ENABLE_Msk;
 
-    SysTick -> LOAD = 10500;
+    SysTick->CTRL  = SysTick_CTRL_TICKINT_Msk;
+
+    SysTick -> LOAD = SysTick ->CALIB & SysTick_CALIB_TENMS_Msk *100;
 
     SysTick -> VAL = 0;
 
@@ -23,28 +21,7 @@ void timer_systick_init () {
 }
 
 void SysTick_Handler(void) {
-    printf("1ms");
 }
-
-void timer_init() {
-    PMC -> PMC_PCER0 = (1 << ID_TC0); //Enable peripheral clock for timer counter 0
-    
-    TC0 -> TC_CHANNEL[1].TC_CMR = TC_CMR_CPCTRG;
-    TC0 -> TC_CHANNEL[1].TC_CMR = TC_CMR_TCCLKS_TIMER_CLOCK2;
-
-    TC0 -> TC_CHANNEL[1].TC_RC = RC_1MS; // Setting period to 20ms
-
-    TC0 -> TC_CHANNEL[1].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG; //Enables clock
-
-    NVIC_EnableIRQ(TC0_IRQn);
-}
-
-void TC0_Handler (void) {
-    uint32_t status;
-    status = TC1 -> TC_CHANNEL[1].TC_SR;
-    printf("1ms");
-}
-
 
 void timer_pwm_init() {
     PMC -> PMC_PCER0 = (1 << ID_TC0); //Enable peripheral clock for timer counter 0
@@ -63,6 +40,11 @@ void timer_pwm_init() {
     TC0 -> TC_CHANNEL[0].TC_RC = RC_20MS; // Setting period to 20ms
     TC0 -> TC_CHANNEL[0].TC_RA = RA_MID; //Duty cycle to mid
 
-    //TC0 -> TC_CHANNEL[0].TC_IER = TC_IER_CPAS | TC_IER_CPCS; //Enable interrupt for RA compare and RC compare
+    TC0 -> TC_CHANNEL[0].TC_IER = TC_IER_CPAS | TC_IER_CPCS; //Enable interrupt for RA compare and RC compare
     TC0 -> TC_CHANNEL[0].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG; //Enables clock
+}
+
+void TC0_Handler (void) {
+    uint32_t status;
+    status = TC0 -> TC_CHANNEL[0].TC_SR;
 }
