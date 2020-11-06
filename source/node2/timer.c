@@ -8,20 +8,29 @@
 #define RA_MIN 37800
 #define RA_MAX 88200
 
+volatile int count;
 
 void timer_systick_init () {
+    SysTick_Config((SysTick -> CALIB & SysTick_CALIB_TENMS_Msk) - 1);
+}
 
-    SysTick->CTRL  = SysTick_CTRL_TICKINT_Msk;
-
-    SysTick -> LOAD = SysTick ->CALIB & SysTick_CALIB_TENMS_Msk *100;
-
-    SysTick -> VAL = 0;
-
-    NVIC_EnableIRQ(SysTick_IRQn);
+void timer_systick_wait(uint8_t ms) {
+    count = ms;
+    timer_systick_init();
+    while (count != (uint32_t) 0) {
+    }
 }
 
 void SysTick_Handler(void) {
+    if (count != (uint32_t) 0) {
+        count --;
+    }
+    else  {
+        SysTick -> CTRL = 0;
+    }
 }
+
+
 
 void timer_pwm_init() {
     PMC -> PMC_PCER0 = (1 << ID_TC0); //Enable peripheral clock for timer counter 0

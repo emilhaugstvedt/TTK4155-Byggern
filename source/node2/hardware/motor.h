@@ -1,13 +1,10 @@
+#include <stdint.h>
 
 typedef enum motor_direction_t {
     RIGHT,
     LEFT
 } MOTOR_DIRECTION;
 
-
-uint32_t led_read();
-
-void send_time();
 
 void motor_init();
 

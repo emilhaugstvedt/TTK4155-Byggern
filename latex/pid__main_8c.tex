@@ -1,0 +1,183 @@
+\hypertarget{pid__main_8c}{}\section{source/node2/pid\+\_\+main.c File Reference}
+\label{pid__main_8c}\index{source/node2/pid\+\_\+main.\+c@{source/node2/pid\+\_\+main.\+c}}
+
+
+Example of use of general P\+ID implementation for A\+VR.  
+
+
+{\ttfamily \#include $<$inavr.\+h$>$}\newline
+{\ttfamily \#include $<$ioavr.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}stdint.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pid.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_g_l_o_b_a_l___f_l_a_g_s}{G\+L\+O\+B\+A\+L\+\_\+\+F\+L\+A\+GS}
+\begin{DoxyCompactList}\small\item\em Flags for status information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pid__main_8c_acfc98b8c69707c30ac9a96bb12f2a0ab}{K\+\_\+P}~1.\+00
+\begin{DoxyCompactList}\small\item\em P, I and D parameter values. \end{DoxyCompactList}\item 
+\#define \hyperlink{pid__main_8c_a5e606c8dc6de900bea3cd7740ac1bd4d}{K\+\_\+I}~0.\+00
+\item 
+\#define \hyperlink{pid__main_8c_a0b9e481775b5a7ecdd0dbb43cacc1a09}{K\+\_\+D}~0.\+00
+\item 
+\#define \hyperlink{pid__main_8c_a847b99b287f7c6555ab0f1cb4ed52119}{T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}~157
+\begin{DoxyCompactList}\small\item\em Sampling Time Interval. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{pid__main_8c_a8b6ed5249679f9ab632635809380a5e5}\label{pid__main_8c_a8b6ed5249679f9ab632635809380a5e5}} 
+\+\_\+\+\_\+interrupt void \hyperlink{pid__main_8c_a8b6ed5249679f9ab632635809380a5e5}{T\+I\+M\+E\+R0\+\_\+\+O\+V\+F\+\_\+\+I\+SR} (void)
+\begin{DoxyCompactList}\small\item\em Timer interrupt to control the sampling interval. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{pid__main_8c_a7ce0a14b6e7779fbb2d9a05333792c41}\label{pid__main_8c_a7ce0a14b6e7779fbb2d9a05333792c41}} 
+void \hyperlink{pid__main_8c_a7ce0a14b6e7779fbb2d9a05333792c41}{Init} (void)
+\begin{DoxyCompactList}\small\item\em Init of P\+ID controller demo. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{pid__main_8c_a5d425d60c4c5cc27b85f5d91f3089b24}{Get\+\_\+\+Reference} (void)
+\begin{DoxyCompactList}\small\item\em Read reference value. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{pid__main_8c_a6c21c2fcef2ac5b7bd483e1ca38f14e0}{Get\+\_\+\+Measurement} (void)
+\begin{DoxyCompactList}\small\item\em Read system process value. \end{DoxyCompactList}\item 
+void \hyperlink{pid__main_8c_a9890f9c197e2e87a8b187f2c4c821e7a}{Set\+\_\+\+Input} (int16\+\_\+t input\+Value)
+\begin{DoxyCompactList}\small\item\em Set control input to system. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{pid__main_8c_a6288eba0f8e8ad3ab1544ad731eb7667}\label{pid__main_8c_a6288eba0f8e8ad3ab1544ad731eb7667}} 
+void \hyperlink{pid__main_8c_a6288eba0f8e8ad3ab1544ad731eb7667}{main} (void)
+\begin{DoxyCompactList}\small\item\em Demo of P\+ID controller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{pid__main_8c_a37da6ea23a280bce8cc2ba16f6a31532}\label{pid__main_8c_a37da6ea23a280bce8cc2ba16f6a31532}} 
+struct \hyperlink{struct_g_l_o_b_a_l___f_l_a_g_s}{G\+L\+O\+B\+A\+L\+\_\+\+F\+L\+A\+GS} {\bfseries g\+Flags} = \{0, 0\}
+\item 
+\mbox{\Hypertarget{pid__main_8c_ae95a1d87e515fada8578052871321ff9}\label{pid__main_8c_ae95a1d87e515fada8578052871321ff9}} 
+struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA} \hyperlink{pid__main_8c_ae95a1d87e515fada8578052871321ff9}{pid\+Data}
+\begin{DoxyCompactList}\small\item\em Parameters for regulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Example of use of general P\+ID implementation for A\+VR. 
+
+Example of how to setup and use the general P\+ID implementation in \hyperlink{pid_8c}{pid.\+c}.
+
+
+\begin{DoxyItemize}
+\item File\+: \hyperlink{main_8c_source}{main.\+c}
+\item Compiler\+: I\+AR E\+W\+A\+A\+VR 4.\+11A
+\item Supported devices\+: All A\+VR devices can be used.
+\item App\+Note\+: A\+V\+R221 -\/ Discrete P\+ID controller
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Atmel Corporation\+: \href{http://www.atmel.com}{\tt http\+://www.\+atmel.\+com} ~\newline
+ Support email\+: \href{mailto:avr@atmel.com}{\tt avr@atmel.\+com}
+\end{DoxyAuthor}
+\$\+Name\$ \begin{DoxyParagraph}{Revision}
+456 
+\end{DoxyParagraph}
+\$\+R\+C\+Sfile\$ \begin{DoxyParagraph}{Date}
+2006-\/02-\/16 12\+:46\+:13 +0100 (to, 16 feb 2006) 
+\end{DoxyParagraph}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{pid__main_8c_a0b9e481775b5a7ecdd0dbb43cacc1a09}\label{pid__main_8c_a0b9e481775b5a7ecdd0dbb43cacc1a09}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!K\+\_\+D@{K\+\_\+D}}
+\index{K\+\_\+D@{K\+\_\+D}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{K\+\_\+D}{K\_D}}
+{\footnotesize\ttfamily \#define K\+\_\+D~0.\+00}
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000003}{Todo}]\end{DoxyRefDesc}
+
+
+Definition at line 37 of file pid\+\_\+main.\+c.
+
+\mbox{\Hypertarget{pid__main_8c_a5e606c8dc6de900bea3cd7740ac1bd4d}\label{pid__main_8c_a5e606c8dc6de900bea3cd7740ac1bd4d}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!K\+\_\+I@{K\+\_\+I}}
+\index{K\+\_\+I@{K\+\_\+I}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{K\+\_\+I}{K\_I}}
+{\footnotesize\ttfamily \#define K\+\_\+I~0.\+00}
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000002}{Todo}]\end{DoxyRefDesc}
+
+
+Definition at line 35 of file pid\+\_\+main.\+c.
+
+\mbox{\Hypertarget{pid__main_8c_acfc98b8c69707c30ac9a96bb12f2a0ab}\label{pid__main_8c_acfc98b8c69707c30ac9a96bb12f2a0ab}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!K\+\_\+P@{K\+\_\+P}}
+\index{K\+\_\+P@{K\+\_\+P}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{K\+\_\+P}{K\_P}}
+{\footnotesize\ttfamily \#define K\+\_\+P~1.\+00}
+
+
+
+P, I and D parameter values. 
+
+The K\+\_\+P, K\+\_\+I and K\+\_\+D values (P, I and D gains) need to be modified to adapt to the application at hand\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000001}{Todo}]\end{DoxyRefDesc}
+
+
+Definition at line 33 of file pid\+\_\+main.\+c.
+
+\mbox{\Hypertarget{pid__main_8c_a847b99b287f7c6555ab0f1cb4ed52119}\label{pid__main_8c_a847b99b287f7c6555ab0f1cb4ed52119}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}}
+\index{T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL@{T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL}{TIME\_INTERVAL}}
+{\footnotesize\ttfamily \#define T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL~157}
+
+
+
+Sampling Time Interval. 
+
+Specify the desired P\+ID sample time interval With a 8-\/bit counter (255 cylces to overflow), the time interval value is calculated as follows\+: T\+I\+M\+E\+\_\+\+I\+N\+T\+E\+R\+V\+AL = ( desired interval \mbox{[}sec\mbox{]} ) $\ast$ ( frequency \mbox{[}Hz\mbox{]} ) / 255\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000004}{Todo}]\end{DoxyRefDesc}
+
+
+Definition at line 57 of file pid\+\_\+main.\+c.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pid__main_8c_a6c21c2fcef2ac5b7bd483e1ca38f14e0}\label{pid__main_8c_a6c21c2fcef2ac5b7bd483e1ca38f14e0}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!Get\+\_\+\+Measurement@{Get\+\_\+\+Measurement}}
+\index{Get\+\_\+\+Measurement@{Get\+\_\+\+Measurement}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{Get\+\_\+\+Measurement()}{Get\_Measurement()}}
+{\footnotesize\ttfamily int16\+\_\+t Get\+\_\+\+Measurement (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Read system process value. 
+
+This function must return the measured data 
+
+Definition at line 101 of file pid\+\_\+main.\+c.
+
+\mbox{\Hypertarget{pid__main_8c_a5d425d60c4c5cc27b85f5d91f3089b24}\label{pid__main_8c_a5d425d60c4c5cc27b85f5d91f3089b24}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!Get\+\_\+\+Reference@{Get\+\_\+\+Reference}}
+\index{Get\+\_\+\+Reference@{Get\+\_\+\+Reference}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{Get\+\_\+\+Reference()}{Get\_Reference()}}
+{\footnotesize\ttfamily int16\+\_\+t Get\+\_\+\+Reference (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Read reference value. 
+
+This function must return the reference value. May be constant or varying 
+
+Definition at line 90 of file pid\+\_\+main.\+c.
+
+\mbox{\Hypertarget{pid__main_8c_a9890f9c197e2e87a8b187f2c4c821e7a}\label{pid__main_8c_a9890f9c197e2e87a8b187f2c4c821e7a}} 
+\index{pid\+\_\+main.\+c@{pid\+\_\+main.\+c}!Set\+\_\+\+Input@{Set\+\_\+\+Input}}
+\index{Set\+\_\+\+Input@{Set\+\_\+\+Input}!pid\+\_\+main.\+c@{pid\+\_\+main.\+c}}
+\subsubsection{\texorpdfstring{Set\+\_\+\+Input()}{Set\_Input()}}
+{\footnotesize\ttfamily void Set\+\_\+\+Input (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{input\+Value }\end{DoxyParamCaption})}
+
+
+
+Set control input to system. 
+
+Set the output from the controller as input to system. 
+
+Definition at line 111 of file pid\+\_\+main.\+c.
+

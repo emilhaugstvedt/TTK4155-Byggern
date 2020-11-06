@@ -5,8 +5,6 @@
 void adc_init() {
     PMC -> PMC_PCER1 = (1 << ID_ADC - 32); //lar adc få klokke
 
-    //PIOA -> PIO_PDR = PIO_PDR_P2;
-
     ADC -> ADC_MR = ADC_MR_FREERUN_ON; // Putting the ADC in freerun mode
 
     ADC -> ADC_CHER = ADC_CHER_CH0; //enabler register 0 
@@ -15,6 +13,6 @@ void adc_init() {
 }
 
 uint32_t adc_read () {
-    uint32_t data = ADC -> ADC_CDR[0];
+    uint32_t data = ADC -> ADC_CDR[0]; //Read the data from the data register
     return data;
 }

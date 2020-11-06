@@ -77,35 +77,5 @@ int main(){
         hardware_send(&joy, &slider);
     }
 
-
-
-//    while (1){
-//     ;
-//    }
-    //------------------------------------------------------------
-/*
-    can_msg_t msg;
-    msg.id = 3;
-    //while(1){
-    //    multifunc_joy_get(&j);
-    //    multifunc_joy_get_dir(&j);
-    //    msg.data[0] = j.val_x;
-    //    msg.data[1] = j.val_y;
-        //msg.data[2] = 0;
-        //msg.data[3] = 0;
-        //msg.data[4] = 0;
-        //msg.data[5] = 0;
-        //msg.length = 2;
-        //can_send(&msg);
-    msg.data[0] = 'a';
-    msg.data[1] = 'b';
-    msg.data[2] = 'c';
-    msg.length = 3;
-    while(1) {
-        can_send(&msg);
-    }
-*/
-    //------------------------------------------------------------
-
 }
 

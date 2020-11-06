@@ -1,0 +1,169 @@
+\hypertarget{pid_8h}{}\section{source/node2/pid.h File Reference}
+\label{pid_8h}\index{source/node2/pid.\+h@{source/node2/pid.\+h}}
+
+
+Header file for \hyperlink{pid_8c}{pid.\+c}.  
+
+
+{\ttfamily \#include \char`\"{}stdint.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA}
+\begin{DoxyCompactList}\small\item\em P\+ID Status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{pid_8h_a1dfc2df4edf95f828461ec28a276d36c}\label{pid_8h_a1dfc2df4edf95f828461ec28a276d36c}} 
+\#define {\bfseries S\+C\+A\+L\+I\+N\+G\+\_\+\+F\+A\+C\+T\+OR}~128
+\item 
+\#define \hyperlink{pid_8h_aaa1ac5caef84256eaeb39594e58e096f}{M\+A\+X\+\_\+\+I\+NT}~I\+N\+T16\+\_\+\+M\+AX
+\begin{DoxyCompactList}\small\item\em Maximum values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{pid_8h_a5535b838abf57fcd6aa71dd632c51bc8}\label{pid_8h_a5535b838abf57fcd6aa71dd632c51bc8}} 
+\#define {\bfseries M\+A\+X\+\_\+\+L\+O\+NG}~I\+N\+T32\+\_\+\+M\+AX
+\item 
+\mbox{\Hypertarget{pid_8h_ac375d861606f40c7616251bb33f7c9ab}\label{pid_8h_ac375d861606f40c7616251bb33f7c9ab}} 
+\#define {\bfseries M\+A\+X\+\_\+\+I\+\_\+\+T\+E\+RM}~(M\+A\+X\+\_\+\+L\+O\+NG / 2)
+\item 
+\mbox{\Hypertarget{pid_8h_aa93f0eb578d23995850d61f7d61c55c1}\label{pid_8h_aa93f0eb578d23995850d61f7d61c55c1}} 
+\#define {\bfseries F\+A\+L\+SE}~0
+\item 
+\mbox{\Hypertarget{pid_8h_aa8cecfc5c5c054d2875c03e77b7be15d}\label{pid_8h_aa8cecfc5c5c054d2875c03e77b7be15d}} 
+\#define {\bfseries T\+R\+UE}~1
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA} \hyperlink{pid_8h_a9d6249c93388816b9a13c444e18574c6}{pid\+Data\+\_\+t}
+\begin{DoxyCompactList}\small\item\em P\+ID Status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{pid_8h_a29fe06205528f56bcfdd242e3d1f9c19}{pid\+\_\+\+Init} (int16\+\_\+t p\+\_\+factor, int16\+\_\+t i\+\_\+factor, int16\+\_\+t d\+\_\+factor, struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA} $\ast$pid)
+\begin{DoxyCompactList}\small\item\em Initialisation of P\+ID controller parameters. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{pid_8h_ac0129c983e062dd6ee925ea932bae93f}{pid\+\_\+\+Controller} (int16\+\_\+t set\+Point, int16\+\_\+t process\+Value, struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA} $\ast$pid\+\_\+st)
+\begin{DoxyCompactList}\small\item\em P\+ID control algorithm. \end{DoxyCompactList}\item 
+void \hyperlink{pid_8h_a7b7ef4e688a58b21b6d36f620d8a645e}{pid\+\_\+\+Reset\+\_\+\+Integrator} (\hyperlink{pid_8h_a9d6249c93388816b9a13c444e18574c6}{pid\+Data\+\_\+t} $\ast$pid\+\_\+st)
+\begin{DoxyCompactList}\small\item\em Resets the integrator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{pid_8c}{pid.\+c}. 
+
+
+\begin{DoxyItemize}
+\item File\+: \hyperlink{pid_8h}{pid.\+h}
+\item Compiler\+: I\+AR E\+W\+A\+A\+VR 4.\+11A
+\item Supported devices\+: All A\+VR devices can be used.
+\item App\+Note\+: A\+V\+R221 -\/ Discrete P\+ID controller
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Atmel Corporation\+: \href{http://www.atmel.com}{\tt http\+://www.\+atmel.\+com} ~\newline
+ Support email\+: \href{mailto:avr@atmel.com}{\tt avr@atmel.\+com}
+\end{DoxyAuthor}
+\$\+Name\$ \begin{DoxyParagraph}{Revision}
+456 
+\end{DoxyParagraph}
+\$\+R\+C\+Sfile\$ \begin{DoxyParagraph}{Date}
+2006-\/02-\/16 12\+:46\+:13 +0100 (to, 16 feb 2006) 
+\end{DoxyParagraph}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{pid_8h_aaa1ac5caef84256eaeb39594e58e096f}\label{pid_8h_aaa1ac5caef84256eaeb39594e58e096f}} 
+\index{pid.\+h@{pid.\+h}!M\+A\+X\+\_\+\+I\+NT@{M\+A\+X\+\_\+\+I\+NT}}
+\index{M\+A\+X\+\_\+\+I\+NT@{M\+A\+X\+\_\+\+I\+NT}!pid.\+h@{pid.\+h}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+I\+NT}{MAX\_INT}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+I\+NT~I\+N\+T16\+\_\+\+M\+AX}
+
+
+
+Maximum values. 
+
+Needed to avoid sign/overflow problems 
+
+Definition at line 53 of file pid.\+h.
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{pid_8h_a9d6249c93388816b9a13c444e18574c6}\label{pid_8h_a9d6249c93388816b9a13c444e18574c6}} 
+\index{pid.\+h@{pid.\+h}!pid\+Data\+\_\+t@{pid\+Data\+\_\+t}}
+\index{pid\+Data\+\_\+t@{pid\+Data\+\_\+t}!pid.\+h@{pid.\+h}}
+\subsubsection{\texorpdfstring{pid\+Data\+\_\+t}{pidData\_t}}
+{\footnotesize\ttfamily typedef struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA}  \hyperlink{pid_8h_a9d6249c93388816b9a13c444e18574c6}{pid\+Data\+\_\+t}}
+
+
+
+P\+ID Status. 
+
+Setpoints and data used by the P\+ID control algorithm 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pid_8h_ac0129c983e062dd6ee925ea932bae93f}\label{pid_8h_ac0129c983e062dd6ee925ea932bae93f}} 
+\index{pid.\+h@{pid.\+h}!pid\+\_\+\+Controller@{pid\+\_\+\+Controller}}
+\index{pid\+\_\+\+Controller@{pid\+\_\+\+Controller}!pid.\+h@{pid.\+h}}
+\subsubsection{\texorpdfstring{pid\+\_\+\+Controller()}{pid\_Controller()}}
+{\footnotesize\ttfamily int16\+\_\+t pid\+\_\+\+Controller (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{set\+Point,  }\item[{int16\+\_\+t}]{process\+Value,  }\item[{struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA} $\ast$}]{pid\+\_\+st }\end{DoxyParamCaption})}
+
+
+
+P\+ID control algorithm. 
+
+Calculates output from setpoint, process value and P\+ID status.
+
+
+\begin{DoxyParams}{Parameters}
+{\em set\+Point} & Desired value. \\
+\hline
+{\em process\+Value} & Measured value. \\
+\hline
+{\em pid\+\_\+st} & P\+ID status struct. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 59 of file pid.\+c.
+
+\mbox{\Hypertarget{pid_8h_a29fe06205528f56bcfdd242e3d1f9c19}\label{pid_8h_a29fe06205528f56bcfdd242e3d1f9c19}} 
+\index{pid.\+h@{pid.\+h}!pid\+\_\+\+Init@{pid\+\_\+\+Init}}
+\index{pid\+\_\+\+Init@{pid\+\_\+\+Init}!pid.\+h@{pid.\+h}}
+\subsubsection{\texorpdfstring{pid\+\_\+\+Init()}{pid\_Init()}}
+{\footnotesize\ttfamily void pid\+\_\+\+Init (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{p\+\_\+factor,  }\item[{int16\+\_\+t}]{i\+\_\+factor,  }\item[{int16\+\_\+t}]{d\+\_\+factor,  }\item[{struct \hyperlink{struct_p_i_d___d_a_t_a}{P\+I\+D\+\_\+\+D\+A\+TA} $\ast$}]{pid }\end{DoxyParamCaption})}
+
+
+
+Initialisation of P\+ID controller parameters. 
+
+Initialise the variables used by the P\+ID algorithm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+factor} & Proportional term. \\
+\hline
+{\em i\+\_\+factor} & Integral term. \\
+\hline
+{\em d\+\_\+factor} & Derivate term. \\
+\hline
+{\em pid} & Struct with P\+ID status. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 35 of file pid.\+c.
+
+\mbox{\Hypertarget{pid_8h_a7b7ef4e688a58b21b6d36f620d8a645e}\label{pid_8h_a7b7ef4e688a58b21b6d36f620d8a645e}} 
+\index{pid.\+h@{pid.\+h}!pid\+\_\+\+Reset\+\_\+\+Integrator@{pid\+\_\+\+Reset\+\_\+\+Integrator}}
+\index{pid\+\_\+\+Reset\+\_\+\+Integrator@{pid\+\_\+\+Reset\+\_\+\+Integrator}!pid.\+h@{pid.\+h}}
+\subsubsection{\texorpdfstring{pid\+\_\+\+Reset\+\_\+\+Integrator()}{pid\_Reset\_Integrator()}}
+{\footnotesize\ttfamily void pid\+\_\+\+Reset\+\_\+\+Integrator (\begin{DoxyParamCaption}\item[{\hyperlink{pid_8h_a9d6249c93388816b9a13c444e18574c6}{pid\+Data\+\_\+t} $\ast$}]{pid\+\_\+st }\end{DoxyParamCaption})}
+
+
+
+Resets the integrator. 
+
+Calling this function will reset the integrator in the P\+ID regulator. 
+
+Definition at line 112 of file pid.\+c.
+
