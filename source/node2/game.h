@@ -1,3 +1,5 @@
+#ifndef GAME_H
+#define GAME_H
 #include <stdint.h>
 
 typedef enum status_t {
@@ -14,3 +16,5 @@ typedef struct game_t {
 
 
 } GAME;
+
+#endif

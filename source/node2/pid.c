@@ -1,31 +1,28 @@
 
-#include "pid."
-#include "utilities.h"
+#include "pid.h"
 
-void pid_init(pid_data_t & data) {
-    data.K_p = ENCODER_MAX/SLIDER_MAX;
+/*
+void pid_init(PID_DATA *data) {
+    data -> K_p = ENCODER_MAX / SLIDER_MAX;
 }
+*/
 
  int16_t slider_to_encoder(int16_t slider_val) {
-     return slider_val* ENCODER_MAX/SLIDER_MAX 
+     return slider_val* ENCODER_MAX/SLIDER_MAX; 
  }
 
-int16_t pid_controller( pid_data_t & data, int16_t reference, int16_t measurment) {
-    data.curr_error = referance - measurment;
+int16_t pid_controller(int16_t reference, int16_t measurment) {
 
-    data.integral
+    
+    pid_regulator.cur_error = reference - measurment;
 
+    pid_regulator.integral = pid_regulator.integral + pid_regulator.cur_error;
 
+    //printf("%d %d %d \n\r",measurment, reference, pid_regulator.cur_error);
 
-    if(data.curr_error > 0) {
-        motor_direction(LEFT);
-    }
-    else
-    {
-        motor_direction(RIGHT)
-    }
+    //pid_regulator.cur_error = pid_regulator.cur_error;
 
-    data.prev_error = data.cur_error;
+    int16_t u = K_p*abs(pid_regulator.cur_error);
 
-    return data.K_p*abs(data.cur_error)
+    return u;
 }

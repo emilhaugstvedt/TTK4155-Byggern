@@ -1,5 +1,6 @@
-#include "sam.h"
 #include "motor.h"
+#include "sam.h"
+
 
 void motor_init () {
     PIOD -> PIO_PER |= PIO_PER_P10 | PIO_PER_P9;

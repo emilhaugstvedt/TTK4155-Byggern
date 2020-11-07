@@ -1,5 +1,6 @@
-#include "sam.h"
 #include "timer.h"
+#include "sam.h"
+
 
 #include <stdint.h>
 
@@ -8,7 +9,9 @@
 #define RA_MIN 37800
 #define RA_MAX 88200
 
-volatile int count;
+static uint32_t count = 0;
+
+
 
 void timer_systick_init () {
     SysTick_Config((SysTick -> CALIB & SysTick_CALIB_TENMS_Msk) - 1);

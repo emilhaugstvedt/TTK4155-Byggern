@@ -73,7 +73,7 @@ int main(){
     joy.val_x = 128;
     joy.val_y = 128;
     while (1) {
-        printf("%d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left);
+        printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
         hardware_send(&joy, &slider);
     }
 

@@ -9,6 +9,10 @@
         "utilities.h": "c",
         "hardware.h": "c",
         "timer.h": "c",
-        "printf-stdarg.h": "c"
-    }
+        "printf-stdarg.h": "c",
+        "pid.h": "c",
+        "stdint.h": "c",
+        "motor.h": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false
 }

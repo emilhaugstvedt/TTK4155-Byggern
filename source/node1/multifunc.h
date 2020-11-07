@@ -27,6 +27,7 @@ typedef struct {
 
     uint8_t left;
     uint8_t right;
+    uint8_t button;
 
 } slider_t;
 
@@ -38,6 +39,6 @@ void multifunc_slider_get (slider_t *slide);
 
 void multifunc_joy_get_dir(joystick_t *joy);
 
-uint8_t multifunc_joy_button_get();
+uint8_t multifunc_joy_button_get(slider_t *slide);
 
 //void multifunc_joy_filter(joystick_t *joy_filter);

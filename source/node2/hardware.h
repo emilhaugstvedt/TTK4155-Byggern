@@ -1,3 +1,5 @@
+#ifndef HARDWARE_H
+#define HARDWARE_H  
 #include "hardware/servo.h"
 #include "hardware/motor.h"
 #include "hardware/solenoid.h"
@@ -12,3 +14,4 @@
 #include "pwm_driver.h"
 #include "sam.h"
 
+#endif

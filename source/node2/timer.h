@@ -1,3 +1,6 @@
+#ifndef TIMER_H
+#define TIMER_H
+#include <stdint.h>
 
 typedef struct time_t {
 
@@ -17,3 +20,4 @@ void timer_init();
 void timer_pwm_init();
 
 void timer_systick_wait(uint8_t ms);
+#endif
