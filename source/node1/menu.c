@@ -2,15 +2,51 @@
 
 #define MENU_COL 20
 
+menu_t game_menu () {
+    menu_t m;
+    node_t game = menu_new_node("GAME");
+    node_t settings = menu_new_node("SETTINGS");
+    node_t highscore = menu_new_node("HIGHSCORE");
+    node_t songs = menu_new_node("PLAY A SONG");
 
-void menu_init() {
+    menu_add_node(&m, &game);
+    menu_add_node(&m, &settings);
+    menu_add_node(&m, &highscore);
+    menu_add_node(&m, &songs);
+
+    node_t songs_ole_brum =menu_new_node("OLE BRUM");
+    node_t songs_bae_bae = menu_new_node("BAE BAE LILLE LAM");
+    node_t songs_tenke_sjael = menu_new_node("TENKE SJAEL");
+
+    node_t settings_brightness = menu_new_node("BRIGHTNESS");
+    node_t settings_difficulity = menu_new_node("DIFFICULITY");
+    node_t settings_volume = menu_new_node("VOLUME");
+
+    menu_add_sub_node(&settings, &settings_brightness);
+    menu_add_sub_node(&settings, &settings_volume);
+    menu_add_sub_node(&settings, &settings_difficulity);
+
+    menu_add_sub_node(&songs, &songs_ole_brum);
+    menu_add_sub_node(&songs, &songs_tenke_sjael);
+    menu_add_sub_node(&songs, &songs_bae_bae);
+
+    return m;
+}
+
+
+
+void menu_init(menu_t *m) {
     oled_init();
     oled_reset();
+    m -> head = NULL;
+    m -> tail = NULL;
 }
 
 node_t menu_new_node(char* node_name) {
     node_t node;
     node.name = node_name;
+    node.child_head = NULL;
+    node.child_tail = NULL;
     return node;
 }
 
@@ -49,7 +85,7 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
             flag = 0;
         }
         if(joy->dir_x == RIGHT && flag == 1) {
-            m->current_choice = m->current_choice->children[0];
+            m->current_choice = m->current_choice -> child;
             menu_update(m);
             flag = 0;
         }
@@ -61,9 +97,59 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
     }
 }
 
+void menu_add_node(menu_t *m, node_t *node) {
 
-void menu_add_node(menu_t *m, node_t* node) {
-    node->number_of_children = 0;
+    if (m -> tail == NULL || m -> head == NULL) {
+
+        m->current_choice = node;
+
+        m -> head = node;
+        m -> tail = node;
+
+        node -> next = node;
+        node -> prev = node;
+
+    }
+    else {
+
+        m -> tail -> next = node;
+        m -> tail = node;
+
+        m -> head -> prev = node;
+        
+        node -> next = m -> head;
+
+    }
+}
+
+menu_add_child(node_t *parent, node_t *child) {
+     
+     if(parent -> child_head == NULL || parent -> child_tail == NULL) {
+
+        parent -> child_head = child;
+        parent -> child_tail = child;
+
+        child -> next = child;
+        child -> prev = child;
+     }
+     else {
+
+        parent -> child_tail -> next = child;
+        parent -> child_tail = child;
+
+        parent -> child_head -> prev = child;
+        
+        parent -> next = child -> child_head;
+
+     }
+
+}
+
+
+/* void menu_add_node(menu_t *m, node_t* node) {
+
+    node -> child  = NULL
+
     if(m->number_of_nodes > 0){
         m->nodes[0]->prev = node;
         m->nodes[m->number_of_nodes - 1]->next = node;
@@ -79,7 +165,7 @@ void menu_add_node(menu_t *m, node_t* node) {
         node->prev = node;
         m->number_of_nodes++;
     }
-}
+} 
 
 void menu_add_sub_node(node_t *parent_node, node_t *sub_node) {
     sub_node -> parent = parent_node;
@@ -99,4 +185,4 @@ void menu_add_sub_node(node_t *parent_node, node_t *sub_node) {
         parent_node->number_of_children++;
     }
 
-}
+} */

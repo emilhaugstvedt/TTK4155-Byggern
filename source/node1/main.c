@@ -14,7 +14,6 @@
 
 
 
-
 int main(){
 
     //--------------------init------------------------
@@ -26,56 +25,31 @@ int main(){
     menu_init();
     //-----------------------------------------------
 
-
-
-
-
-
-
-    /*joystick_t joy;
+    joystick_t joy;
     joy.dir_x = NEUTRAL;
     joy.dir_y = NEUTRAL;
 
-    menu_t m;
-    node_t game = menu_new_node("GAME");
-    node_t settings = menu_new_node("SETTINGS");
-    node_t highscore = menu_new_node("HIGHSCORE");
-    node_t songs = menu_new_node("PLAY A SONG");
+    menu_t menu = game_menu();
 
-    menu_add_node(&m, &game);
-    menu_add_node(&m, &settings);
-    menu_add_node(&m, &highscore);
-    menu_add_node(&m, &songs);
-
-    node_t songs_ole_brum =menu_new_node("OLE BRUM");
-    node_t songs_bae_bae = menu_new_node("BAE BAE LILLE LAM");
-    node_t songs_tenke_sjael = menu_new_node("TENKE SJAEL");
-
-    node_t settings_brightness = menu_new_node("BRIGHTNESS");
-    node_t settings_difficulity = menu_new_node("DIFFICULITY");
-    node_t settings_volume = menu_new_node("VOLUME");
-
-    menu_add_sub_node(&settings, &settings_brightness);
-    menu_add_sub_node(&settings, &settings_volume);
-    menu_add_sub_node(&settings, &settings_difficulity);
-
-    menu_add_sub_node(&songs, &songs_ole_brum);
-    menu_add_sub_node(&songs, &songs_tenke_sjael);
-    menu_add_sub_node(&songs, &songs_bae_bae);
+    menu_fsm(&menu, &joy); 
 
 
-    menu_write(&m);
-    menu_fsm(&m, &joy);*/
+
+
+
+
 
     
-    joystick_t joy;
+
+    
+    /*joystick_t joy;
     slider_t slider;
     joy.val_x = 128;
     joy.val_y = 128;
     while (1) {
         printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
         hardware_send(&joy, &slider);
-    }
+    }*/
 
 }
 

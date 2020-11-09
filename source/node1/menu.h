@@ -13,8 +13,10 @@ typedef struct node_t{
     const char *name;
     
     struct node_t *parent;
-    uint8_t number_of_children;
-    struct node_t *children[8];
+
+    struct node_t *child;
+    struct node_t *child_head;
+    struct node_t *child_tail;
 
 } node_t;
 
@@ -26,11 +28,13 @@ typedef struct node_t{
 typedef struct menu_t {
 
     struct node_t *current_choice;
-    uint8_t number_of_nodes;
 
-    struct node_t *nodes[8];
+    struct node_t *head;
+    struct node_t *tail;
 
 } menu_t;
+
+menu_t game_menu();
 
 /**
  * @brief Function that initialize the menu.
