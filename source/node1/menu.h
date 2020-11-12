@@ -41,7 +41,7 @@ menu_t game_menu();
  * It uses the init function of the oled as well. 
  * 
  */
-void menu_init();
+void menu_init(menu_t* m);
 
 void menu_write(menu_t *m);
 
@@ -49,8 +49,8 @@ void menu_add_node(menu_t *m, node_t* node);
 
 void menu_fsm(menu_t *m, joystick_t *joy);
 
-node_t menu_new_node();
+node_t menu_new_node(char* node_name);
 
 void menu_update(menu_t *m);
 
-void menu_add_sub_node(node_t *parent, node_t *sub_node);
+void menu_add_cgild(node_t *parent, node_t *child);

@@ -1,6 +1,6 @@
 build/utilities.o: utilities.c utilities.h pid.h hardware.h \
  hardware/servo.h hardware/motor.h hardware/solenoid.h hardware/encoder.h \
- adc.h dac.h can_controller.h pwm_driver.h sam/sam3x/include/sam.h \
+ adc.h dac.h can_controller.h sam/sam3x/include/sam.h \
  sam/sam3x/include/sam3x8e.h sam/cmsis/core_cm3.h \
  sam/cmsis/cmsis_version.h sam/cmsis/cmsis_compiler.h \
  sam/cmsis/cmsis_gcc.h sam/cmsis/mpu_armv7.h \
@@ -74,4 +74,4 @@ build/utilities.o: utilities.c utilities.h pid.h hardware.h \
  sam/sam3x/include/instance/instance_wdt.h \
  sam/sam3x/include/instance/instance_rtc.h \
  sam/sam3x/include/instance/instance_gpbr.h \
- sam/sam3x/include/pio/pio_sam3x8e.h msg_handler.h timer.h
+ sam/sam3x/include/pio/pio_sam3x8e.h msg_handler.h

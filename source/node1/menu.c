@@ -22,13 +22,13 @@ menu_t game_menu () {
     node_t settings_difficulity = menu_new_node("DIFFICULITY");
     node_t settings_volume = menu_new_node("VOLUME");
 
-    menu_add_sub_node(&settings, &settings_brightness);
-    menu_add_sub_node(&settings, &settings_volume);
-    menu_add_sub_node(&settings, &settings_difficulity);
+    menu_add_child(&settings, &settings_brightness);
+    menu_add_child(&settings, &settings_volume);
+    menu_add_child(&settings, &settings_difficulity);
 
-    menu_add_sub_node(&songs, &songs_ole_brum);
-    menu_add_sub_node(&songs, &songs_tenke_sjael);
-    menu_add_sub_node(&songs, &songs_bae_bae);
+    menu_add_child(&songs, &songs_ole_brum);
+    menu_add_child(&songs, &songs_tenke_sjael);
+    menu_add_child(&songs, &songs_bae_bae);
 
     return m;
 }

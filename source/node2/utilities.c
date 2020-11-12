@@ -1,25 +1,27 @@
 #include "utilities.h"
 #include "hardware.h"
 #include "msg_handler.h"
-#include "timer.h"
+#include "pid.h"
 
 #define MOTOR_MAX 0xFFF
 #define VAL_MAX 128
 
 volatile uint8_t solenodi_on;
 
+volatile uint16_t ms_gone = 0;
+
 void util_servo_driver() {
-    printf("%d \n\r", util_data.servo_data);
+    //printf("%d \n\r", util_data.servo_data);
     servo_set_duty_cycle(util_data.servo_data);
 }
 
 void util_solenoid_driver() {
-    printf("%d \n\r", util_data.solenoid);
+    //printf("%d \n\r", util_data.solenoid);
     if((util_data.solenoid != 0) && (solenodi_on == 0)){
         solenodi_on = 1;
         soleniod_init();
         solenoid_on();
-        timer_systick_wait(5000);
+        timer_systick_wait(500);
         solenoid_off();
         util_data.solenoid = 0;
     }
@@ -61,17 +63,15 @@ uint16_t util_encoder_read() {
 
 
 
-void util_motor_driver() {
+void util_motor_driver(PID_DATA * regulator) {
 
-    uint16_t reference = slider_to_encoder(util_data.motor_data);
+    int16_t reference = slider_to_encoder(util_data.motor_data);
 
-    uint16_t measurement = util_encoder_read();
+    int16_t measurement = util_encoder_read();
 
-    //printf("%d %d \n\r", reference, measurement );
+    int16_t u = pid_controller(regulator, reference, measurement, ms_gone);
 
-    uint16_t u = pid_controller(reference, measurement);
-
-    if ((pid_regulator.cur_error) > 0) {
+    if ((regulator -> cur_error) > 0) {
         motor_direction(RIGHT);
     }
     else
@@ -81,8 +81,11 @@ void util_motor_driver() {
     
      
     //u = (u/0xFFFF)*0xFFF;
-    //printf("%d \n\r", u);
+
+    //printf("%d %d %d \n\r", reference, measurement, u );
 
 
-    dac_send(u);
+    //dac_send(u);
+
+    ms_gone = 0;
 }

@@ -5,8 +5,8 @@
 #define ENCODER_MAX 9000
 #define MOTOR_INPUT_MAX 4096
 #define SLIDER_MAX 225
-#define K_p 0.45
-#define K_i 0.10
+#define K_p 1
+#define K_i 0.001
 
 typedef struct pid_data_t{
 
@@ -16,15 +16,17 @@ typedef struct pid_data_t{
     int16_t integral;
     int16_t derivat;
 
+    int16_t last_time;
+
 } PID_DATA;
 
-volatile PID_DATA pid_regulator;
+PID_DATA regulator;
+
 
 void pid_init();
 
 int16_t slider_to_encoder(int16_t slider_val);
 
-
-int16_t pid_controller(int16_t reference, int16_t measurment);
+int16_t pid_controller(PID_DATA *pid, int16_t reference, int16_t measurment, uint8_t ms_gone);
 
 #endif

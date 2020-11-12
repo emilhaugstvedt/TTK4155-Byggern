@@ -22,17 +22,17 @@ int main(){
     string_init(MYUBRR);
     can_IRS_enable();
     can_init();
-    menu_init();
+    //menu_init();
     //-----------------------------------------------
 
-    joystick_t joy;
+    /*joystick_t joy;
     joy.dir_x = NEUTRAL;
     joy.dir_y = NEUTRAL;
 
     menu_t menu = game_menu();
 
     menu_fsm(&menu, &joy); 
-
+*/
 
 
 
@@ -41,15 +41,14 @@ int main(){
 
     
 
-    
-    /*joystick_t joy;
+    joystick_t joy;
     slider_t slider;
     joy.val_x = 128;
     joy.val_y = 128;
     while (1) {
         printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
         hardware_send(&joy, &slider);
-    }*/
+    }
 
 }
 

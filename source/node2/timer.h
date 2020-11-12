@@ -10,8 +10,7 @@ typedef struct time_t {
 
 };
 
-volatile uint8_t ms;
-
+volatile uint16_t ms_gone;
 
 void timer_systick_init();
 
@@ -20,4 +19,8 @@ void timer_init();
 void timer_pwm_init();
 
 void timer_systick_wait(uint8_t ms);
+
+
+void timer_TC3_init();
+
 #endif

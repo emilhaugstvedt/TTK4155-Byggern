@@ -1,6 +1,6 @@
 #include "servo.h"
 #include "sam.h"
-#include "timer.h"
+#include "../pwm_driver.h"
 
 
 #define DUTY_MAX 255

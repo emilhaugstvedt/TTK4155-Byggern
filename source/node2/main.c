@@ -4,13 +4,10 @@
 #include "uart_and_printf/printf-stdarg.h"
 
 #include "sam.h"
-#include "msg_handler.h"
 #include "can_interrupt.h"
-
-
+#include "msg_handler.h"
 
 #define CAN_BR_PRESET 0x00290165
-
 
 
 
@@ -23,15 +20,18 @@ int main()
    adc_init();
    timer_systick_init();
    dac_init();
-   encoder_init();
    motor_init();
    motor_on();
+   encoder_init();
+   timer_TC3_init();
 
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
+   PID_DATA regulator;
+   pid_init(&regulator);
 
    while (1)
    {
-      util_motor_driver();
+      util_motor_driver(&regulator);
       util_solenoid_driver();
       util_servo_driver();
    }

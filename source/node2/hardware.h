@@ -11,7 +11,8 @@
 #include "adc.h"
 #include "dac.h"
 #include "can_controller.h"
-#include "pwm_driver.h"
 #include "sam.h"
+
+volatile uint16_t ms_gone;
 
 #endif

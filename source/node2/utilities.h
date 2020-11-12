@@ -13,9 +13,11 @@ typedef struct util_data_t {
     uint8_t solenoid
 } UTIL_DATA;
 
+PID_DATA regulator;
+
 volatile UTIL_DATA util_data;
 
-void util_motor_driver();
+void util_motor_driver(PID_DATA * regulator);
 
 void util_servo_driver();
 
