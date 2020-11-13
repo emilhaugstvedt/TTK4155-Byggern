@@ -9,6 +9,9 @@
 #define RA_MIN 37800
 #define RA_MAX 88200
 
+#define RC_TIMER 840000
+#define RA_TIMER 420000
+
 volatile uint32_t count = 0;
 
 
@@ -24,7 +27,6 @@ void timer_systick_wait(uint8_t ms) {
 }
 
 void SysTick_Handler(void) {
-    ms_gone += 1;
     if (count != (uint32_t) 0) {
         count --;
     }
@@ -56,7 +58,6 @@ void timer_pwm_init() {
 }
 
 void TC0_Handler (void) {
-    printf("time \n\r");
     uint32_t status;
     status = TC0 -> TC_CHANNEL[0].TC_SR;
 }
@@ -71,15 +72,11 @@ void timer_TC3_init() {
     TC1 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_ACPC_SET; //RC compare effect to set on RC
     TC1 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_ACPA_CLEAR; // RA compare effect to clear on TIOA1
 
-    TC1 -> TC_CHANNEL[0].TC_RC = RC_20MS; // Setting period to 20ms
-    TC1 -> TC_CHANNEL[0].TC_RA = RA_MID; //Duty cycle to mid1
+    TC1 -> TC_CHANNEL[0].TC_RC = RC_TIMER; // Setting period to 20ms
+    TC1 -> TC_CHANNEL[0].TC_RA = RA_TIMER; //Duty cycle to mid1
 
     TC1 -> TC_CHANNEL[0].TC_IER = TC_IER_CPAS | TC_IER_CPCS; //Enable interrupt for RA compare and RC compare
     TC1 -> TC_CHANNEL[0].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG; //Enables clock
-}
 
-void TC3_Handler(void) {
-    printf("time \n\r");
-    uint32_t status;
-    status = TC1 -> TC_CHANNEL[0].TC_SR;
+    NVIC_EnableIRQ(TC3_IRQn);
 }

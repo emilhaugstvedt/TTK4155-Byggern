@@ -99,12 +99,13 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
 
 void menu_add_node(menu_t *m, node_t *node) {
 
+      m -> tail = node;
+
     if (m -> tail == NULL || m -> head == NULL) {
 
-        m->current_choice = node;
+        m -> current_choice = node;
 
         m -> head = node;
-        m -> tail = node;
 
         node -> next = node;
         node -> prev = node;
@@ -113,7 +114,6 @@ void menu_add_node(menu_t *m, node_t *node) {
     else {
 
         m -> tail -> next = node;
-        m -> tail = node;
 
         m -> head -> prev = node;
         
@@ -167,7 +167,7 @@ menu_add_child(node_t *parent, node_t *child) {
     }
 } 
 
-void menu_add_sub_node(node_t *parent_node, node_t *sub_node) {
+void menu_add_child(node_t *parent_node, node_t *sub_node) {
     sub_node -> parent = parent_node;
     if (parent_node -> number_of_children > 0) {
         parent_node -> children[0] -> prev = sub_node;

@@ -2,8 +2,6 @@
 #include "sam.h"
 #include "timer.h"
 
-#include <stdint.h>
-
 #define RC_20MS 840000
 #define RA_MID  63000
 #define RA_MIN 37800

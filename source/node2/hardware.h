@@ -13,6 +13,5 @@
 #include "can_controller.h"
 #include "sam.h"
 
-volatile uint16_t ms_gone;
 
 #endif

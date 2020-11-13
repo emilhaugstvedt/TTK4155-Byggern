@@ -2,7 +2,6 @@
 #define PWM_DRIVER_H
 #include <stdint.h>
 
-volatile uint16_t ms_gone;
 
 void pwm_init();
 

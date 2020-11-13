@@ -8,7 +8,6 @@
 
 volatile uint8_t solenodi_on;
 
-volatile uint16_t ms_gone = 0;
 
 void util_servo_driver() {
     //printf("%d \n\r", util_data.servo_data);
@@ -69,7 +68,7 @@ void util_motor_driver(PID_DATA * regulator) {
 
     int16_t measurement = util_encoder_read();
 
-    int16_t u = pid_controller(regulator, reference, measurement, ms_gone);
+    int16_t u = pid_controller(regulator, reference, measurement);
 
     if ((regulator -> cur_error) > 0) {
         motor_direction(RIGHT);
@@ -79,6 +78,7 @@ void util_motor_driver(PID_DATA * regulator) {
         motor_direction(LEFT);
     }
     
+    printf("%d %d %d \n\r", reference, measurement, u);
      
     //u = (u/0xFFFF)*0xFFF;
 
@@ -87,5 +87,4 @@ void util_motor_driver(PID_DATA * regulator) {
 
     //dac_send(u);
 
-    ms_gone = 0;
 }
