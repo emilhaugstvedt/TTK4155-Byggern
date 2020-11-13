@@ -12,5 +12,6 @@ void msg_handler(CAN_MESSAGE msg) {
         util_data.servo_data = msg.data[SERVO_DATA];
         util_data.motor_data = msg.data[MOTOR_DATA];
         util_data.solenoid = msg.data[SOLENOID];
+        printf("%d \n\r", util_data.solenoid);
     }
 }

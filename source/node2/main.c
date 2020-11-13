@@ -22,6 +22,8 @@ int main()
    motor_on();
    encoder_init();
    timer_TC3_init();
+   timer_TC6_init();
+   soleniod_init();
 
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
    PID_DATA regulator;

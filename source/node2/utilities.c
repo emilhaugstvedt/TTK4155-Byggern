@@ -2,6 +2,7 @@
 #include "hardware.h"
 #include "msg_handler.h"
 #include "pid.h"
+#include "sam.h"
 
 #define MOTOR_MAX 0xFFF
 #define VAL_MAX 128
@@ -16,18 +17,23 @@ void util_servo_driver() {
 
 void util_solenoid_driver() {
     //printf("%d \n\r", util_data.solenoid);
-    if((util_data.solenoid != 0) && (solenodi_on == 0)){
-        solenodi_on = 1;
-        soleniod_init();
+    //if((util_data.solenoid != 0) && (solenodi_on == 0)){
+        //soleniod_init();
+
+    if(util_data.solenoid != 0) {
         solenoid_on();
         timer_systick_wait(500);
         solenoid_off();
-        util_data.solenoid = 0;
     }
-    else if(util_data.solenoid == 0)
-    {
-        solenodi_on = 0;
-    }
+    // solenoid_on();
+    // timer_systick_wait(500);
+    // solenoid_off();
+    // util_data.solenoid = 0;
+    //}
+    //else if(util_data.solenoid == 0)
+    //{
+        //solenodi_on = 0;
+    //}
     
 }
 

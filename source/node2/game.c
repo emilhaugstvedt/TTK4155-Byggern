@@ -7,8 +7,7 @@ void game_fsm (GAME *game) {
     while (1) {
         switch (game -> state)
         {
-        case GO:
-            
+        case GO:    
             break;
         
         case STOP:
@@ -20,3 +19,29 @@ void game_fsm (GAME *game) {
         }
     }
 }
+
+/*
+void game_fsm (GAME *game) {
+    while (1) {
+        switch (game -> state)
+        {
+        case 1:
+            run_menu( noe inni her burde endre statem til game)
+            break;
+        case 2:
+            if (lys signal == 0) {
+                game -> end
+            }
+        case 3: //endcase
+        }
+        
+
+
+    }
+}
+
+
+
+
+
+*/

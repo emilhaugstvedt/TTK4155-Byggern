@@ -80,3 +80,22 @@ void timer_TC3_init() {
 
     NVIC_EnableIRQ(TC3_IRQn);
 }
+
+void timer_TC6_init() {
+    PMC -> PMC_PCER0 = (1 << ID_TC6); //Enable peripheral clock for timer counter 0
+
+
+    TC2 -> TC_CHANNEL[0].TC_CMR = TC_CMR_WAVE; //Setting the channel to wave mode
+    TC2 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_TCCLKS_TIMER_CLOCK1; //Chosing timer clock 1 MCK/2
+    TC2 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_WAVSEL_UP_RC; //UP mode with automatic trigger on RC
+    TC2 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_ACPC_SET; //RC compare effect to set on RC
+    TC2 -> TC_CHANNEL[0].TC_CMR |= TC_CMR_ACPA_CLEAR; // RA compare effect to clear on TIOA1
+
+    TC2 -> TC_CHANNEL[0].TC_RC = RC_TIMER; // Setting period to 20ms
+    TC2 -> TC_CHANNEL[0].TC_RA = RA_TIMER; //Duty cycle to mid1
+
+    TC2 -> TC_CHANNEL[0].TC_IER = TC_IER_CPAS | TC_IER_CPCS; //Enable interrupt for RA compare and RC compare
+    TC2 -> TC_CHANNEL[0].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG; //Enables clock
+
+    NVIC_EnableIRQ(TC6_IRQn);
+}

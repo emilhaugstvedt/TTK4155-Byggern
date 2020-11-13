@@ -1,5 +1,3 @@
 
 
-void game_time() {
-    
-}
+void game_timer_init();
