@@ -18,6 +18,7 @@
 
 int main(){
 
+
     //--------------------init------------------------
     SRAM_init();
     adc_init();
@@ -27,20 +28,13 @@ int main(){
     timer_init();
     //-----------------------------------------------
 
-    joystick_t joy;
-    joy.dir_x = NEUTRAL;
-    joy.dir_y = NEUTRAL;
 
-    oled_init();
-    oled_reset();
-
-    while (1) {
-
-        oled_write_char_8("A", 3, 3);
+    // joystick_t joy;
+    // joy.dir_x = NEUTRAL;
+    // joy.dir_y = NEUTRAL;
     
-    }
 
-    /*joystick_t joy;
+    joystick_t joy;
     joystick_t last_joy;
 
     slider_t slider;
@@ -53,9 +47,6 @@ int main(){
         printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
         hardware_send(&joy, &slider, &last_joy, &last_slider);
     }
-    while(1);
-
-}*/
 
 /*ISR(TIMER0_OVF_vect) {
     TCNT0 = 0xB2;

@@ -1,7 +1,13 @@
 #include "multifunc.h"
+#include "avr/io.h"
+#include "util/delay.h"
+
+#include "adc.h"
 
 #define WAIT 0.00652
 
+
+/*
 void multifunc_joy_get (joystick_t *joy) {
     adc_write(0b10000010);
     _delay_ms(WAIT);
@@ -13,8 +19,18 @@ void multifunc_joy_get (joystick_t *joy) {
     _delay_ms(WAIT);
 }
 
+*/
 
-void multifunc_joy_get_filter (joystick_t *joy){
+void multifunc_joy_init(joystick_t* joy) {
+
+    joy -> dir_x = NEUTRAL;
+    joy -> dir_y = NEUTRAL;
+    joy-> val_x = 128;
+    joy-> val_y = 128;
+
+}
+
+void multifunc_joy_get(joystick_t *joy){
     adc_write(0b10000010);
     _delay_ms(WAIT);
     uint8_t new_val = (adc_read());

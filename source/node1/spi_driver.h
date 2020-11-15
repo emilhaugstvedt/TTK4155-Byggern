@@ -1,3 +1,6 @@
+#ifndef SPI_DRIVER_H_
+#define SPI_DRIVER_H_
+
 #include "avr/io.h"
 
 void spi_master_init();
@@ -14,3 +17,6 @@ void spi_master_transmit(char data);
  * @param value 
  */
 void spi_set_CS(uint8_t value);
+
+
+#endif

@@ -4,7 +4,8 @@
  * between the different nodes.
  */
 
-
+#ifndef CAN_DRIVER_H_
+#define CAN_DRIVER_H_
 #include <stdio.h>
 
 #define CAN_ID_OFFSET 5
@@ -42,3 +43,4 @@ void can_receive(can_msg_t *msg);
 
 void interrupt_handler();
 
+#endif

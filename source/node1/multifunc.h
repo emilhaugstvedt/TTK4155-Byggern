@@ -1,3 +1,6 @@
+#ifndef MULITFUNC_H_
+#define MULTIFUNC_H_
+
 #include "avr/io.h"
 #include "util/delay.h"
 
@@ -31,9 +34,11 @@ typedef struct {
 
 } slider_t;
 
-void multifunc_joy_get(joystick_t *joy);
 
-void multifunc_joy_get_filter (joystick_t *joy);
+
+void multifunc_joy_init(joystick_t *joy);
+
+void multifunc_joy_get(joystick_t *joy);
 
 void multifunc_slider_get (slider_t *slide);
 
@@ -42,3 +47,5 @@ void multifunc_joy_get_dir(joystick_t *joy);
 uint8_t multifunc_joy_button_get(slider_t *slide);
 
 //void multifunc_joy_filter(joystick_t *joy_filter);
+
+#endif

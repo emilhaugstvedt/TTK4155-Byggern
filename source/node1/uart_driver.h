@@ -1,3 +1,5 @@
+#ifndef UART_DRIVER_H_
+#define UART_DRIVER_H_
 
 #include "avr/io.h"
 
@@ -17,3 +19,5 @@ unsigned char uart_receive (void);
  * @param ubrr The baud rate of the uart. 
  */
 void string_init(unsigned int ubrr);
+
+#endif

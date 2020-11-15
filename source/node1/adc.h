@@ -2,7 +2,8 @@
 * @file adc.h
 * @brief This file contains functions for initialiazing and read/write to anf from the adc.
 */
-
+#ifndef ADC_H_
+#define ADC_H_
 #include "avr/io.h"
 
 /**
@@ -24,3 +25,4 @@ void adc_write(uint8_t data);
  */
 uint8_t adc_read();
 
+#endif

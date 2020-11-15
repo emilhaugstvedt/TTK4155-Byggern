@@ -1,3 +1,5 @@
+#ifndef MENU_H_
+#define MENU_H_
 #include "oled.h"
 #include "hardware_driver.h"
 
@@ -54,3 +56,4 @@ node_t menu_new_node(char* node_name);
 void menu_update(menu_t *m);
 
 void menu_add_cgild(node_t *parent, node_t *child);
+#endif

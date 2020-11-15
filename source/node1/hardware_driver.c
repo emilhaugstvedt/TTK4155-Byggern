@@ -34,7 +34,7 @@ uint8_t hardware_sufficient_change(joystick_t* joy, slider_t* slider, joystick_t
 }
 
 void hardware_send(joystick_t* joy, slider_t* slider, joystick_t* last_joy, slider_t* last_slider) {
-    multifunc_joy_get_filter(joy);
+    multifunc_joy_get(joy);
     multifunc_slider_get(slider);
     multifunc_joy_button_get(slider);
     if(hardware_sufficient_change(joy, slider, last_joy, last_slider)) {
