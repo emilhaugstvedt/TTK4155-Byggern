@@ -78,19 +78,16 @@ void util_motor_driver(PID_DATA * regulator) {
 
     if ((regulator -> cur_error) > 0) {
         motor_direction(RIGHT);
+        //printf("RIGHT \r");
     }
     else
     {
         motor_direction(LEFT);
+        //printf("LEFT \n\r");
     }
-    
+
     printf("%d %d %d \n\r", reference, measurement, u);
-     
-    //u = (u/0xFFFF)*0xFFF;
 
-    //printf("%d %d %d \n\r", reference, measurement, u );
-
-
-    //dac_send(u);
+    dac_send(u);
 
 }

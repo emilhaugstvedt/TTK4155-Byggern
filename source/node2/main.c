@@ -28,6 +28,7 @@ int main()
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
    PID_DATA regulator;
    pid_init(&regulator);
+   audio_sensor_init();
 
 
    while (1)
@@ -35,5 +36,6 @@ int main()
       util_motor_driver(&regulator);
       util_solenoid_driver();
       util_servo_driver();
+      //read_audio_sensor();
    }
 }

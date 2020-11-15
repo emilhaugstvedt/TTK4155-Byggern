@@ -44,3 +44,4 @@ void TC3_Handler(void) {
     uint32_t status;
     status = TC1 -> TC_CHANNEL[0].TC_SR;
 }
+

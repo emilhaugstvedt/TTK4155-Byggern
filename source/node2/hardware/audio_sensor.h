@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <stdint.h>
-
 
 void audio_sensor_init();
 

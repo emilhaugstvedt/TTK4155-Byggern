@@ -1,7 +1,5 @@
 #include "audio_sensor.h"
-#include "node2/can_controller.h"
 #include "sam.h"
-#include "node2\adc.h"
 
 /*
   Audio sensor

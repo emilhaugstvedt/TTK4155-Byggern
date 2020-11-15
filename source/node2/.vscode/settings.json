@@ -12,7 +12,9 @@
         "printf-stdarg.h": "c",
         "pid.h": "c",
         "stdint.h": "c",
-        "motor.h": "c"
+        "motor.h": "c",
+        "functional": "c",
+        "unordered_map": "c"
     },
     "C_Cpp.dimInactiveRegions": false
 }

@@ -25,7 +25,7 @@ int main(){
     string_init(MYUBRR);
     can_IRS_enable();
     can_init();
-    timer_init();
+    //timer_init();
     //-----------------------------------------------
 
 
@@ -35,15 +35,16 @@ int main(){
     
 
     joystick_t joy;
+    multifunc_joy_init(&joy);
     joystick_t last_joy;
+    multifunc_joy_init(&last_joy);
 
     slider_t slider;
     slider_t last_slider;
 
 
-    joy.val_x = 128;
-    joy.val_y = 128;
     while (1) {
+
         printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
         hardware_send(&joy, &slider, &last_joy, &last_slider);
     }
