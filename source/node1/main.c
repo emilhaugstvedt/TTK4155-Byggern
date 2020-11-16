@@ -14,32 +14,48 @@
 #include "menu.h"
 #include "game.h"
 
+#include<util/delay.h>
+
 
 
 int main(){
 
 
     //--------------------init------------------------
-    SRAM_init();
-    adc_init();
     string_init(MYUBRR);
-    can_IRS_enable();
-    can_init();
+    _delay_ms(20);
+    SRAM_init();
+    _delay_ms(20);
+    adc_init();
+    _delay_ms(20);
+    oled_init();
+    _delay_ms(20);
+    oled_reset();
+    _delay_ms(20);
 
+/*
+    can_IRS_enable();
+    _delay_ms(20);
+    can_init();
+    _delay_ms(20);
     //timer_init();
+    */
     //-----------------------------------------------
 
 
     // joystick_t joy;
     // joy.dir_x = NEUTRAL;
     // joy.dir_y = NEUTRAL;
+
+    printf("flash");
+
+    oled_write_char_8("a", 2, 2);
+    //while (1)
+    //{
+    //    oled_write_char_8("a", 2, 2);
+    //}
     
 
-    oled_init();
-
-    while(1) {
-    oled_write_command(0xA5);
-    }
 
     /*joystick_t joy;
     multifunc_joy_init(&joy);

@@ -25,7 +25,7 @@ void oled_init()
     oled_write_command(0xd9);  //set pre-charge period
     oled_write_command(0x21);
     oled_write_command(0x20);  //Set Memory Addressing Mode
-    oled_write_command(0x02);
+    oled_write_command(0x00);
     oled_write_command(0xdb);  //VCOM deselect level mode
     oled_write_command(0x30);
     oled_write_command(0xad);  //master configuration
@@ -100,7 +100,7 @@ void oled_reset() {
         oled_goto_line(page);
         oled_goto_column(0);
         for (int seg = 0; seg < 128; seg++){
-            oled_write_data(0);
+            oled_write_data(0x0);
         }
     }
 }

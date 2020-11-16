@@ -18,16 +18,21 @@ void uart_init(unsigned int ubrr) {
 }
 
 void uart_transmit (unsigned char data) {
+    /* Wait for emty transmitt buffer*/
     while (!(UCSR0A & (1 << UDRE0)));
+    /* Put data into buffer, sends the data*/
     UDR0 = data;
 }
 
 unsigned char uart_receive (void) {
+    /* Wait for data to be received*/
     while (!(UCSR0A & (1 << RXC0)));
+    /* Get and return received data from buffer*/
     return UDR0;
 }
 
 void string_init(unsigned int ubrr) {
     uart_init(ubrr);
+    /* Make the stream between the terminal and the transmitt/receive functions*/
     fdevopen(uart_transmit, uart_receive);
 }
