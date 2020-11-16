@@ -30,12 +30,11 @@ int main()
    pid_init(&regulator);
    audio_sensor_init();
 
-
    while (1)
    {
+      util_read_audio_sensor();
       util_motor_driver(&regulator);
       util_solenoid_driver();
       util_servo_driver();
-      //read_audio_sensor();
    }
 }

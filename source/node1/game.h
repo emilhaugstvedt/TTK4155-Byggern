@@ -9,4 +9,6 @@ void game_reduction();
 
 void game_play();
 
+void audio_game_play();
+
 #endif

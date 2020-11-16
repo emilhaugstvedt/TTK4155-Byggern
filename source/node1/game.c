@@ -1,6 +1,6 @@
 #include "timer.h"
 #include "hardware_driver.h"
-
+#include "oled.h"
 #include "multifunc.h"
 #include "game.h"
 #include "stdio.h"
@@ -9,6 +9,8 @@
 
 typedef struct game_info_t {
 
+    uint16_t lives;
+    int IR_beam;
     uint16_t score;
     //needs a timer
 
@@ -17,8 +19,8 @@ typedef struct game_info_t {
 static GAME_INFO game;
 
 void game_init() {
-    game.score = 3;
-    //init timer
+    game.lives = 3;
+    game.score;
 }
 
 void game_reduction() {
@@ -34,11 +36,20 @@ void game_play() {
     multifunc_joy_init(j_prev);
     slider_t s_next;
     slider_t s_prev;
+    char score_string = "SCORE";
+    char lives_string = "lives rem:"
 
     while(game.score != 0) {
 
         hardware_send(j_next, s_next, j_prev, s_prev);
+        if (game.IR_beam == 0) {
+                game_reduction();
+        }
+        
         //update screen
+        oled_update_line(score_string, 1, 1, 6);
+        oled_update_line(game.score, 4, 5, 5);
+        oled_update_line(lives_string, 7, 1, 11);
 
     }
 
@@ -46,6 +57,10 @@ void game_play() {
 
 
 /*----------------------------------------------------*/
+
+void audio_game_play() {
+    game_init();
+}
 
 
 //volatile uint8_t ms_gone;
@@ -55,3 +70,22 @@ ISR(TIMER0_OVF_vect) {
     
     TCNT0 = 0xB2;
 }
+
+/*
+void game_fsm (GAME *game) {
+    while (1) {
+        switch (game -> state)
+        {
+        case 1:
+            run_menu( noe inni her burde endre staten til game)
+            break;
+        case 2:
+            game_play()
+        }
+        
+
+
+    }
+}
+
+//burde brudd av lyset være koblet til en interrupt? hvis ikke fungerer det ikke når for du havner i en evig løkke

@@ -42,7 +42,7 @@ void hardware_send(joystick_t* joy, slider_t* slider, joystick_t* last_joy, slid
         msg.id = MSG_ID;
         msg.length = 3;
         msg.data[SERVO_DATA] = joy->val_x;
-        msg.data[MOTOR_DATA] = slider->left; 
+        msg.data[MOTOR_DATA] = 255 - slider->left; 
         msg.data[SOLENOID] = slider->button;
         can_send(&msg);
      }

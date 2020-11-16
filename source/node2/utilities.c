@@ -7,6 +7,9 @@
 #define MOTOR_MAX 0xFFF
 #define VAL_MAX 128
 
+#define ENCODER_MAX 9000
+#define SLIDER_MAX 255
+
 volatile uint8_t solenodi_on;
 
 
@@ -37,8 +40,8 @@ void util_solenoid_driver() {
     
 }
 
-uint16_t util_encoder_read() {
-    uint16_t data;
+int16_t util_encoder_read() {
+    int16_t data;
     uint8_t high_byte;
     uint8_t low_byte;
     
@@ -61,8 +64,9 @@ uint16_t util_encoder_read() {
 
     data = ((high_byte << 8) | low_byte);
     if (data & (1 << 15)) {
-        return ((uint16_t) (~data) + 1);
+        data = -((uint16_t) (~data) + 1);
     }
+    data = (int16_t) (((data * SLIDER_MAX) / ENCODER_MAX));
     return data;
 }
 
@@ -70,13 +74,13 @@ uint16_t util_encoder_read() {
 
 void util_motor_driver(PID_DATA * regulator) {
 
-    int16_t reference = slider_to_encoder(util_data.motor_data);
+    int16_t reference = util_data.motor_data;
 
     int16_t measurement = util_encoder_read();
 
     int16_t u = pid_controller(regulator, reference, measurement);
 
-    if ((regulator -> cur_error) > 0) {
+    if ((regulator -> cur_error) < 0) {
         motor_direction(RIGHT);
         //printf("RIGHT \r");
     }
@@ -86,8 +90,34 @@ void util_motor_driver(PID_DATA * regulator) {
         //printf("LEFT \n\r");
     }
 
+    u = (u * 0xFFF) / 255;
+    
+    if (u < 0) {
+        u = -u;
+    }
+
     printf("%d %d %d \n\r", reference, measurement, u);
 
     dac_send(u);
 
+    util_data.new_msg = 0;
+
+
+}
+
+void util_read_audio_sensor() {
+  // read the sensor and store it in the variable sensorReading
+  uint8_t data = adc_read_ir_beam();
+  printf("%d \n\r", data);
+
+  /*
+  //dette passer kanskje ikke inn i abstraksjonsnivået med ligger her for nå
+  if (data >= threshold) {
+      CAN_MESSAGE can_msg;
+      can_msg.id = 1;
+      can_msg.data_length = 8;
+      can_msg.data[0] = data;
+      uint8_t can_send(CAN_MESSAGE* can_msg, uint8_t 1);//can send 
+  }
+  */
 }

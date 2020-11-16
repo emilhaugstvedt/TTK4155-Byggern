@@ -5,9 +5,9 @@
 #define ENCODER_MAX 8000
 #define MOTOR_INPUT_MAX 4096
 #define SLIDER_MAX 225
-#define K_p 0.5
-#define K_i 0
-#define K_d 50
+#define K_p 0.9
+#define K_i 15
+#define K_d 1.5
 #define INTEGRAL_MAX 10000
 #define INTEGRAL_MIN -10000
 

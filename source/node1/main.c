@@ -25,6 +25,7 @@ int main(){
     string_init(MYUBRR);
     can_IRS_enable();
     can_init();
+
     //timer_init();
     //-----------------------------------------------
 
@@ -34,7 +35,13 @@ int main(){
     // joy.dir_y = NEUTRAL;
     
 
-    joystick_t joy;
+    oled_init();
+
+    while(1) {
+    oled_write_command(0xA5);
+    }
+
+    /*joystick_t joy;
     multifunc_joy_init(&joy);
     joystick_t last_joy;
     multifunc_joy_init(&last_joy);
@@ -47,8 +54,9 @@ int main(){
 
         printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
         hardware_send(&joy, &slider, &last_joy, &last_slider);
-    }
+    }*/
 
+    
 /*ISR(TIMER0_OVF_vect) {
     TCNT0 = 0xB2;
 }*/
