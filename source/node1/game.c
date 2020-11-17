@@ -20,11 +20,18 @@ static GAME_INFO game;
 
 void game_init() {
     game.lives = 3;
-    game.score;
+    game.score = 0;
 }
 
 void game_reduction() {
     game.score--;
+}
+
+
+void game_update_screen() {
+    oled_update_line(score_string, 1, 1, 6);
+    oled_update_line(game.score, 4, 5, 5);
+    oled_update_line(lives_string, 7, 1, 11);
 }
 
 void game_play() {
@@ -46,30 +53,25 @@ void game_play() {
                 game_reduction();
         }
         
-        //update screen
-        oled_update_line(score_string, 1, 1, 6);
-        oled_update_line(game.score, 4, 5, 5);
-        oled_update_line(lives_string, 7, 1, 11);
-
+        game_update_screen();
     }
 
 }
 
 
-/*----------------------------------------------------*/
-
-void audio_game_play() {
+void game_audio_play() {
     game_init();
+
+    while(game.score != 0) {
+
+        if (game.IR_beam == 0) {
+                game_reduction();
+        }
+        
+        game_update_screen();
+    }
 }
 
-
-//volatile uint8_t ms_gone;
-
-
-ISR(TIMER0_OVF_vect) {
-    
-    TCNT0 = 0xB2;
-}
 
 /*
 void game_fsm (GAME *game) {
@@ -87,5 +89,9 @@ void game_fsm (GAME *game) {
 
     }
 }
+*/
 
-//burde brudd av lyset være koblet til en interrupt? hvis ikke fungerer det ikke når for du havner i en evig løkke
+ISR(TIMER0_OVF_vect) {
+    
+    TCNT0 = 0xB2;
+}

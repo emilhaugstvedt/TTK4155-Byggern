@@ -11,6 +11,11 @@
 #define INTEGRAL_MAX 10000
 #define INTEGRAL_MIN -10000
 
+//audio parameters
+#define K_p_a 0.1
+#define K_i_a 10
+#define K_d_a 1.5
+
 
 typedef struct pid_data_t{
 
@@ -30,5 +35,9 @@ void pid_init();
 int16_t slider_to_encoder(int16_t slider_val);
 
 int16_t pid_controller(PID_DATA *pid, int16_t reference, int16_t measurment);
+
+//dette burde generaliseres til å ta inn ulike verdier av K
+
+int16_t pid_audio_controller(PID_DATA *pid, int16_t reference, int16_t measurment);
 
 #endif

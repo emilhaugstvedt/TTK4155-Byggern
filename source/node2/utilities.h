@@ -32,7 +32,9 @@ int16_t util_encoder_read ();
 
 void util_solenoid_driver();
 
-void util_read_audio_sensor();
+uint8_t util_read_audio_sensor();
+
+void util_audio_motor_driver();
 
 
 #endif

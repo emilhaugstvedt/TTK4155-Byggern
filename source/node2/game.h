@@ -17,4 +17,6 @@ typedef struct game_t {
 
 } GAME;
 
+void game_fsm (GAME *game);
+
 #endif
