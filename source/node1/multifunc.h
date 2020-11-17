@@ -46,6 +46,6 @@ void multifunc_joy_get_dir(joystick_t *joy);
 
 uint8_t multifunc_joy_button_get(slider_t *slide);
 
-//void multifunc_joy_filter(joystick_t *joy_filter);
+void multifunc_joy_get_menu(joystick_t *joy);
 
 #endif

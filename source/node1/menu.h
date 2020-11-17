@@ -16,7 +16,7 @@ typedef struct node_t{
     
     struct node_t *parent;
 
-    struct node_t *child;
+    struct node_t *cur_child;
     struct node_t *child_head;
     struct node_t *child_tail;
 

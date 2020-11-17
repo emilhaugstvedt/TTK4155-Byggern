@@ -24,7 +24,7 @@ menu_t game_menu () {
 
     menu_add_child(&settings, &settings_brightness);
     menu_add_child(&settings, &settings_volume);
-    menu_add_child(&settings, &settings_difficulity);
+    menu_add_child(&settings, &settings_difficulity);   
 
     menu_add_child(&songs, &songs_ole_brum);
     menu_add_child(&songs, &songs_tenke_sjael);
@@ -47,6 +47,10 @@ node_t menu_new_node(char* node_name) {
     node.name = node_name;
     node.child_head = NULL;
     node.child_tail = NULL;
+    node.cur_child = NULL;
+    node.next = NULL;
+    node.prev = NULL;
+    node.parent = NULL;
     return node;
 }
 
@@ -69,28 +73,32 @@ void menu_write(menu_t *m) {
 void menu_fsm(menu_t *m, joystick_t *joy) {
     uint8_t flag = 0;
     while (1) {
-        multifunc_joy_get(joy);
+        multifunc_joy_get_menu(joy);
         multifunc_joy_get_dir(joy);
         if (joy->dir_y == NEUTRAL) {
             flag = 1;
         }
-        if(joy->dir_y == UP && flag == 1) {
-            m->current_choice = m->current_choice->prev;
+        if(m -> current_choice -> prev != NULL && joy->dir_y == UP && flag == 1) {
+            m -> current_choice = m -> current_choice -> prev;
+            printf(m -> current_choice -> name);
             menu_update(m);
             flag = 0;
         }
-        if(joy->dir_y == DOWN && flag == 1) {
-            m->current_choice = m->current_choice->next;
+        if(m -> current_choice -> next != NULL && joy->dir_y == DOWN && flag == 1) {
+            m -> current_choice = m -> current_choice -> next;
+            printf(m -> current_choice -> name);
             menu_update(m);
             flag = 0;
         }
-        if(joy->dir_x == RIGHT && flag == 1) {
-            m->current_choice = m->current_choice -> child;
+        if(m -> current_choice -> cur_child != NULL && joy->dir_x == RIGHT && flag == 1){
+            m -> current_choice = m -> current_choice -> cur_child;
+            printf(m -> current_choice -> name);
             menu_update(m);
             flag = 0;
         }
-        if(joy->dir_x == LEFT && flag == 1) {
-            m->current_choice = m->current_choice->parent;
+        if(m -> current_choice -> parent != NULL && joy -> dir_x == LEFT && flag == 1) {
+            m -> current_choice = m -> current_choice -> parent;
+            printf(m -> current_choice -> name);
             menu_update(m);
             flag = 0;
         }
@@ -99,13 +107,11 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
 
 void menu_add_node(menu_t *m, node_t *node) {
 
-      m -> tail = node;
+    if (m -> tail == NULL && m -> head == NULL) {
 
-    if (m -> tail == NULL || m -> head == NULL) {
-
-        m -> current_choice = node;
-
+        m -> tail = node;
         m -> head = node;
+        m -> current_choice = node;
 
         node -> next = node;
         node -> prev = node;
@@ -114,20 +120,26 @@ void menu_add_node(menu_t *m, node_t *node) {
     else {
 
         m -> tail -> next = node;
+        node -> prev = m -> tail;
+        m -> tail = node;
 
         m -> head -> prev = node;
-        
         node -> next = m -> head;
 
     }
 }
 
 menu_add_child(node_t *parent, node_t *child) {
+
+    child -> parent = parent;
      
      if(parent -> child_head == NULL || parent -> child_tail == NULL) {
 
-        parent -> child_head = child;
         parent -> child_tail = child;
+
+        parent -> cur_child = child;
+
+        parent -> child_head = child;
 
         child -> next = child;
         child -> prev = child;
@@ -135,6 +147,9 @@ menu_add_child(node_t *parent, node_t *child) {
      else {
 
         parent -> child_tail -> next = child;
+
+        child -> prev = parent -> child_tail;
+
         parent -> child_tail = child;
 
         parent -> child_head -> prev = child;
@@ -145,44 +160,3 @@ menu_add_child(node_t *parent, node_t *child) {
 
 }
 
-
-/* void menu_add_node(menu_t *m, node_t* node) {
-
-    node -> child  = NULL
-
-    if(m->number_of_nodes > 0){
-        m->nodes[0]->prev = node;
-        m->nodes[m->number_of_nodes - 1]->next = node;
-        node->next = m->nodes[0];
-        node->prev = m->nodes[m->number_of_nodes - 1];
-        m->nodes[m->number_of_nodes] = node;
-        m->number_of_nodes++;
-    }
-    else {
-        m->current_choice = node;
-        m->nodes[0] = node;
-        node->next = node;
-        node->prev = node;
-        m->number_of_nodes++;
-    }
-} 
-
-void menu_add_child(node_t *parent_node, node_t *sub_node) {
-    sub_node -> parent = parent_node;
-    if (parent_node -> number_of_children > 0) {
-        parent_node -> children[0] -> prev = sub_node;
-        parent_node -> children[parent_node -> number_of_children - 1] -> next = sub_node;
-        sub_node -> next = parent_node -> children[0];
-        sub_node -> prev = parent_node -> children[parent_node -> number_of_children - 1];
-        parent_node -> children[parent_node -> number_of_children] = sub_node;
-        parent_node -> number_of_children++; 
-
-    }
-    else {
-        parent_node->children[0] = sub_node;
-        sub_node->next = sub_node;
-        sub_node->prev = sub_node;
-        parent_node->number_of_children++;
-    }
-
-} */

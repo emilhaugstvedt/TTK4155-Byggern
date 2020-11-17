@@ -8,7 +8,7 @@
 
 
 
-/*void multifunc_joy_get (joystick_t *joy) {
+void multifunc_joy_get_menu (joystick_t *joy) {
     adc_write(0b10000010);
     _delay_ms(WAIT);
     joy -> val_y = adc_read();
@@ -17,7 +17,7 @@
     _delay_ms(WAIT);
     joy -> val_x = adc_read();
     _delay_ms(WAIT);
-}*/
+}
 
 void multifunc_joy_init(joystick_t* joy) {
     joy -> dir_x = NEUTRAL;
@@ -75,8 +75,6 @@ void multifunc_joy_get_dir(joystick_t *joy){
     if (joy->val_y < 160 && joy->val_y > 100) {
         joy->dir_y = NEUTRAL;
     }
-
-    printf("%d \n\r", joy->dir_x);
 }
 
 

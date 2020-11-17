@@ -3,77 +3,77 @@
 #define BAUD 9600
 #define MYUBRR FOSC/16/BAUD-1
 
-#include <avr/io.h>
+#include "avr/io.h"
 #include "stdio.h"
 #include <stdlib.h>
-#include <avr/interrupt.h>
 
 
 #include "uart_driver.h"
 #include "sram.h"
 #include "menu.h"
-#include "game.h"
-
-#include<util/delay.h>
+#include "can_driver.h"
 
 
 
 int main(){
 
 
-    //--------------------init------------------------
-    string_init(MYUBRR);
-    _delay_ms(20);
     SRAM_init();
-    _delay_ms(20);
     adc_init();
-    _delay_ms(20);
-    oled_init();
-    _delay_ms(20);
+    string_init(MYUBRR);
+    can_IRS_enable();
+    can_init();
+
+    menu_t m;
     oled_reset();
-    _delay_ms(20);
+
+    menu_init(&m);
+
+
+    node_t game = menu_new_node("GAME");
+    node_t settings = menu_new_node("SETTINGS");
+    node_t highscore = menu_new_node("HIGHSCORE");
+    node_t songs = menu_new_node("PLAY A SONG");
+
+    menu_add_node(&m, &game);
+    menu_add_node(&m, &settings);
+    menu_add_node(&m, &highscore);
+    menu_add_node(&m, &songs);
+
+    node_t songs_ole_brum = menu_new_node("OLE BRUM");
+    node_t songs_bae_bae = menu_new_node("BAE BAE LILLE LAM");
+    node_t songs_tenke_sjael = menu_new_node("TENKE SJAEL");
+
+    node_t settings_brightness = menu_new_node("BRIGHTNESS");
+    node_t settings_difficulity = menu_new_node("DIFFICULITY");
+    node_t settings_volume = menu_new_node("VOLUME");
+
+    menu_add_child(&settings, &settings_brightness);
+    menu_add_child(&settings, &settings_volume);
+    menu_add_child(&settings, &settings_difficulity);   
+     
+    menu_add_child(&songs, &songs_ole_brum);
+    menu_add_child(&songs, &songs_tenke_sjael);
+    menu_add_child(&songs, &songs_bae_bae);
+
+
+    slider_t s;
+    joystick_t j;
+
+    menu_write(&m);
+
+    menu_fsm(&m, &j);
+
+
+
+
+
+}
+
 
 /*
-    can_IRS_enable();
-    _delay_ms(20);
-    can_init();
-    _delay_ms(20);
-    //timer_init();
-    */
-    //-----------------------------------------------
-
-
-    // joystick_t joy;
-    // joy.dir_x = NEUTRAL;
-    // joy.dir_y = NEUTRAL;
-
-    printf("flash");
-
-    oled_write_char_8("a", 2, 2);
-    //while (1)
-    //{
-    //    oled_write_char_8("a", 2, 2);
-    //}
-    
-
-
-    /*joystick_t joy;
-    multifunc_joy_init(&joy);
-    joystick_t last_joy;
-    multifunc_joy_init(&last_joy);
-
-    slider_t slider;
-    slider_t last_slider;
-
-
-    while (1) {
-
-        printf("%d %d %d %d %d\n\r", joy.val_x, joy.val_y, slider.right, slider.left, slider.button);
-        hardware_send(&joy, &slider, &last_joy, &last_slider);
-    }*/
-
-    
-/*ISR(TIMER0_OVF_vect) {
-    TCNT0 = 0xB2;
+//Putte inn riktig interrupt-vektor i denne funksjonen her.
+ISR() {
+    can_receive(&msg);
 }*/
-}
+
