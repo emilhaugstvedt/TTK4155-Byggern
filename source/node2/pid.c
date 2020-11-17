@@ -60,7 +60,7 @@ int16_t pid_audio_controller(PID_DATA *pid, int16_t reference, int16_t measurmen
 
     }  
 
-    return (K_p_a)*(reference-measurment) + pid -> integral + pid -> derivat;
+    return (K_p_a)*(pid -> cur_error) + pid -> integral + pid -> derivat;
     
 }
 

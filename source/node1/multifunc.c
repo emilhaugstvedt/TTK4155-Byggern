@@ -1,3 +1,4 @@
+///@file multifunc.c
 #include "multifunc.h"
 #include "avr/io.h"
 #include "util/delay.h"
@@ -6,9 +7,7 @@
 
 #define WAIT 0.00652
 
-
-
-void multifunc_joy_get_menu (joystick_t *joy) {
+void multifunc_joy_get_menu(joystick_t *joy) {
     adc_write(0b10000010);
     _delay_ms(WAIT);
     joy -> val_y = adc_read();
@@ -24,7 +23,6 @@ void multifunc_joy_init(joystick_t* joy) {
     joy -> dir_y = NEUTRAL;
     joy-> val_x = 128;
     joy-> val_y = 128;
-
 }
 
 void multifunc_joy_get(joystick_t *joy){
@@ -56,6 +54,12 @@ void multifunc_slider_get (slider_t *slide) {
 }
 
 
+
+void multifunc_button_get(slider_t *slide) {
+    DDRD &= ~(1 << PIND3);
+    slide->button = PIND & (1 << PIND3);
+}
+
 void multifunc_joy_get_dir(joystick_t *joy){
     if(joy->val_x > 240){
         joy->dir_x = RIGHT;
@@ -75,10 +79,4 @@ void multifunc_joy_get_dir(joystick_t *joy){
     if (joy->val_y < 160 && joy->val_y > 100) {
         joy->dir_y = NEUTRAL;
     }
-}
-
-
-uint8_t multifunc_joy_button_get(slider_t *slide) {
-    DDRD &= ~(1 << PIND3);
-    slide->button = PIND & (1 << PIND3);
 }

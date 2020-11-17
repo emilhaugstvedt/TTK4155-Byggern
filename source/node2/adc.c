@@ -1,4 +1,4 @@
-
+///@file adc.c
 #include "adc.h"
 #include "sam/sam3x/include/sam.h"
 

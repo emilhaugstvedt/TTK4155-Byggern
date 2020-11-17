@@ -93,13 +93,9 @@ void can_IRS_enable(){
 }
 
 
-
-
-
-ISR(INT0_vect) {
-    can_msg_t msg;
-    can_receive(&msg);
-    print_message(&msg);
-}
-
+/**
+ * @brief Interrupt service routine for the BADISR interrupt vector
+ * 
+ * @param BADISR_vect BAD interrupt service routine vector.
+ */
 ISR(BADISR_vect){}

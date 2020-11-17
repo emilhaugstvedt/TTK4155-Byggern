@@ -108,8 +108,7 @@ uint8_t mcp2515_read_status() {
     spi_master_transmit(MCP_READ_STATUS);
     status = spi_master_receive();
     spi_set_CS(0);
-    return status;
-    
+    return status;  
 }
 
 

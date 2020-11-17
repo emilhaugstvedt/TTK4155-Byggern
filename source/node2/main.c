@@ -5,7 +5,7 @@
 
 #include "sam.h"
 #include "can_interrupt.h"
-#include "msg_handler.h"
+#include "game.h"
 
 #define CAN_BR_PRESET 0x00290165
 
@@ -27,18 +27,18 @@ int main()
 
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
    PID_DATA regulator;
-   pid_init(&regulator);
+   //pid_init(&regulator);
    audio_sensor_init();
 
-   //PID_DATA pid_a;
-   //pid_init(&pid_a);
+   PID_DATA pid_a;
+   pid_init(&pid_a);
 
    while (1)
    {
-      util_read_audio_sensor();
-      util_motor_driver(&regulator);
-      util_solenoid_driver();
-      util_servo_driver();
-      //util_audio_motor_driver(&pid_a)
+
+      GAME game;
+      game_init(&game);
+      play_game(&game);
+      
    }
 }

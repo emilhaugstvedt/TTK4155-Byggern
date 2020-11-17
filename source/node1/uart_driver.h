@@ -3,7 +3,19 @@
 
 #include "avr/io.h"
 
+/**
+ * @brief Sets the baudrate, enables receiver and transmitter
+ * 
+ * @param ubrr Value to set baudrate
+ * 
+ */
 void uart_init(unsigned int ubrr);
+
+/**
+ * @brief Sends data
+ * 
+ * @param data data to send
+ */
 
 void uart_transmit (unsigned char data);
 

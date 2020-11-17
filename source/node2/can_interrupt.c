@@ -1,7 +1,7 @@
-/*
- * interrupt.c
- *
- * Author: Gustav O. Often and Eivind H. J�lsgard
+/**
+ * @file interrupt.c
+ * @brief File containing functions associated with the CAN interrupts in node 2.
+ * @author  Gustav O. Often and Eivind H. J�lsgard
  *
  * For use in TTK4155 Embedded and Industrial Computer Systems Design
  * NTNU - Norwegian University of Science and Technology

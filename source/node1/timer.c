@@ -1,9 +1,12 @@
+/**
+ * @file timer.c
+ */
+
 #include "timer.h"
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdlib.h>
-
 
 void timer_init() {
 

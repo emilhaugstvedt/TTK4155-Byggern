@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Pid controller for the motor
+ */
+
 #ifndef PID_H
 #define PID_H
 #include <stdint.h>
@@ -13,10 +18,12 @@
 
 //audio parameters
 #define K_p_a 0.1
-#define K_i_a 10
-#define K_d_a 1.5
+#define K_i_a 0
+#define K_d_a 0
 
-
+/**
+ * @brief Struct representing pid-parameters
+ */
 typedef struct pid_data_t{
 
     int16_t cur_error;
@@ -29,15 +36,27 @@ typedef struct pid_data_t{
 
 PID_DATA regulator;
 
-
+/**
+ * @brief Initialize the pid-regulator
+ */
 void pid_init();
 
+/**
+ * @brief Converts the encoder values to the same domane as the encoder values
+ * @return Returns the slider valuses in the encoder values domane
+ */
 int16_t slider_to_encoder(int16_t slider_val);
 
+/**
+ * @brief Calcualtes the appropriate torque voltage from slider referance
+ * @return torque voltage
+ */
 int16_t pid_controller(PID_DATA *pid, int16_t reference, int16_t measurment);
 
-//dette burde generaliseres til å ta inn ulike verdier av K
-
+/**
+ * @brief Calcualtes the appropriate torque voltage from audio referance
+ * @return torque voltage
+ */
 int16_t pid_audio_controller(PID_DATA *pid, int16_t reference, int16_t measurment);
 
 #endif

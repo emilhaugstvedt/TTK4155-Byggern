@@ -41,6 +41,16 @@ void can_send(can_msg_t *msg);
  */
 void can_receive(can_msg_t *msg);
 
-void interrupt_handler();
+/**
+ * @brief Function for printing CAN messages through RS232. 
+ * 
+ * @param msg A struct which contains all the information needed to transfer a message over CAN.
+ */
+void print_message(can_msg_t *msg);
+
+/**
+ * @brief Function for initialising the interrupt service routine. 
+ */
+void can_IRS_enable();
 
 #endif

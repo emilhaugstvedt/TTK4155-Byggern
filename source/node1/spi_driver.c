@@ -1,3 +1,4 @@
+///@file spi.c
 #include "spi_driver.h"
 
 
@@ -17,7 +18,7 @@ void spi_master_transmit(char data){
     while(!(SPSR & (1<<SPIF)));
 }
 
-void spi_master_receive() {
+char spi_master_receive() {
 
     spi_master_transmit(0xaa);
 

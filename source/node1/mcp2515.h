@@ -1,10 +1,12 @@
+///@file mcp2515.h
+///@brief This file contains functions and constants that are specific to the MCP2515.
 #ifndef MCP2515_H_
 #define MCP2515_H_
 
 #include "spi_driver.h"
 
 /*
-mcp2515.h
+mcp2515.h dfd
 
 This file contains constants that are specific to the MCP2515.
 
@@ -169,26 +171,49 @@ Copyright 2003 Kimberly Otten Software Consulting
  * 
  * @return uint8_t 
  */
+uint8_t mcp2515_init();
 // RXBnCTRL
 
 //#define MCP_RXM0		0X20
 //#define MCP_RXM1		0X40
 
-
-uint8_t mcp2515_init();
-
 /**
- * @brief Reset function for the MCP
- * 
+ * @brief Reset function for the MCP 
  */
 void mcp2515_reset();
 
+/**
+ * @brief Function to read from the SPI line 
+ * @param address uint8_t, from which address the MCP will read
+ * @return char: data from the spi_master_recieve function
+ */
 char mcp2515_read(uint8_t address);
 
+/**
+ * @brief Function to write to the SPI line 
+ * @param address uint8_t, to which address the MCP will write
+ * @param data char, that will be written
+ */
 void mcp2515_write(uint8_t address, char data);
 
+/**
+ * @brief Function to change bits for the SPI
+ * @param address uint8_t, to which address the MCP will write
+ * @param data uint8_t, that will be written
+ * @param mask uint8_t, what mask to use
+ */
 void mcp2515_bit_modify(uint8_t address, uint8_t mask, uint8_t data);
 
+/**
+ * @brief Function to read the SPI status register
+ * @return status
+ */
 uint8_t mcp2515_read_status();
+
+/**
+ * @brief Function to decide what transmit to use
+ * @param value uint8_t
+ */
+void mcp2515_rts(uint8_t value);
 
 #endif

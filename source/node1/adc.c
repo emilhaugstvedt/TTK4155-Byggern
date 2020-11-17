@@ -1,3 +1,6 @@
+/**
+ * @file adc.c
+ */
 #include "adc.h"
 
 #define BASE_ADDRESS 0x1400

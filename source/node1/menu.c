@@ -1,21 +1,26 @@
+///@file menu.c
 #include "menu.h"
 
 #define MENU_COL 20
 
-menu_t game_menu () {
+void game_menu() {
     menu_t m;
-    node_t game = menu_new_node("GAME");
+    oled_reset();
+
+    menu_init(&m);
+
+    node_t play_game = menu_new_node("PLAY GAME");
     node_t settings = menu_new_node("SETTINGS");
     node_t highscore = menu_new_node("HIGHSCORE");
     node_t songs = menu_new_node("PLAY A SONG");
 
-    menu_add_node(&m, &game);
+    menu_add_node(&m, &play_game);
     menu_add_node(&m, &settings);
     menu_add_node(&m, &highscore);
     menu_add_node(&m, &songs);
 
-    node_t songs_ole_brum =menu_new_node("OLE BRUM");
-    node_t songs_bae_bae = menu_new_node("BAE BAE LILLE LAM");
+    node_t songs_ole_brum = menu_new_node("OLE BRUM");
+    node_t songs_wap = menu_new_node("WAP");
     node_t songs_tenke_sjael = menu_new_node("TENKE SJAEL");
 
     node_t settings_brightness = menu_new_node("BRIGHTNESS");
@@ -24,15 +29,23 @@ menu_t game_menu () {
 
     menu_add_child(&settings, &settings_brightness);
     menu_add_child(&settings, &settings_volume);
-    menu_add_child(&settings, &settings_difficulity);   
-
+    menu_add_child(&settings, &settings_difficulity);
+     
     menu_add_child(&songs, &songs_ole_brum);
     menu_add_child(&songs, &songs_tenke_sjael);
-    menu_add_child(&songs, &songs_bae_bae);
+    menu_add_child(&songs, &songs_wap);
 
-    return m;
+    menu_add_fun_ptr(&play_game, &game_play);
+
+    
+
+    joystick_t j;
+
+    menu_write(&m);
+
+    menu_fsm(&m, &j);
+
 }
-
 
 
 void menu_init(menu_t *m) {
@@ -44,13 +57,14 @@ void menu_init(menu_t *m) {
 
 node_t menu_new_node(char* node_name) {
     node_t node;
-    node.name = node_name;
-    node.child_head = NULL;
-    node.child_tail = NULL;
-    node.cur_child = NULL;
-    node.next = NULL;
-    node.prev = NULL;
-    node.parent = NULL;
+    node.name = (char*)node_name;
+    node.child_head = (node_t*)NULL;
+    node.child_tail = (node_t*)NULL;
+    node.cur_child = (node_t*)NULL;
+    node.next = (node_t*)NULL;
+    node.prev = (node_t*)NULL;
+    node.parent = (node_t*)NULL;
+    node.fun_ptr = NULL;
     return node;
 }
 
@@ -70,6 +84,7 @@ void menu_write(menu_t *m) {
     oled_write_string(m->current_choice->next->name, 6, MENU_COL, 4);
 }
 
+
 void menu_fsm(menu_t *m, joystick_t *joy) {
     uint8_t flag = 0;
     while (1) {
@@ -78,32 +93,41 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
         if (joy->dir_y == NEUTRAL) {
             flag = 1;
         }
-        if(m -> current_choice -> prev != NULL && joy->dir_y == UP && flag == 1) {
-            m -> current_choice = m -> current_choice -> prev;
-            printf(m -> current_choice -> name);
+        if(joy->dir_y == UP && flag == 1) {
+            m->current_choice = m->current_choice->prev;
             menu_update(m);
             flag = 0;
         }
-        if(m -> current_choice -> next != NULL && joy->dir_y == DOWN && flag == 1) {
-            m -> current_choice = m -> current_choice -> next;
-            printf(m -> current_choice -> name);
+        if(joy->dir_y == DOWN && flag == 1) {
+            m->current_choice = m->current_choice->next;
             menu_update(m);
             flag = 0;
         }
-        if(m -> current_choice -> cur_child != NULL && joy->dir_x == RIGHT && flag == 1){
-            m -> current_choice = m -> current_choice -> cur_child;
-            printf(m -> current_choice -> name);
-            menu_update(m);
+        if((m -> current_choice -> cur_child != NULL || m -> current_choice -> fun_ptr != NULL) && joy->dir_x == RIGHT && flag == 1){
+            if(m -> current_choice -> fun_ptr != NULL) {
+                (*m -> current_choice -> fun_ptr)();
+                menu_lost();
+                while(joy -> dir_x != LEFT) {
+                multifunc_joy_get_menu(joy);
+                multifunc_joy_get_dir(joy);
+                }
+                oled_reset();
+                menu_write(m);
+            }
+            else {
+                m -> current_choice = m -> current_choice -> cur_child;
+                menu_update(m);
+            }
             flag = 0;
-        }
         if(m -> current_choice -> parent != NULL && joy -> dir_x == LEFT && flag == 1) {
             m -> current_choice = m -> current_choice -> parent;
-            printf(m -> current_choice -> name);
             menu_update(m);
             flag = 0;
+        }
         }
     }
 }
+
 
 void menu_add_node(menu_t *m, node_t *node) {
 
@@ -137,9 +161,9 @@ menu_add_child(node_t *parent, node_t *child) {
 
         parent -> child_tail = child;
 
-        parent -> cur_child = child;
-
         parent -> child_head = child;
+
+        parent -> cur_child = child;
 
         child -> next = child;
         child -> prev = child;
@@ -154,9 +178,17 @@ menu_add_child(node_t *parent, node_t *child) {
 
         parent -> child_head -> prev = child;
         
-        parent -> next = child -> child_head;
+        child -> next = parent -> child_head;        
 
      }
 
 }
 
+void menu_add_fun_ptr(node_t* node, void (*fun_ptr)(void)){
+    node -> fun_ptr = fun_ptr;
+}
+
+void menu_lost() {
+    oled_reset();
+    oled_write_string("YOU LOST :(", 3, 10, 8);
+}

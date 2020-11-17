@@ -1,11 +1,7 @@
-/*
- * can_controller.c
- *
- * Author: Gustav O. Often and Eivind H. J�lsgard
- *
- * For use in TTK4155 Embedded and Industrial Computer Systems Design
- * NTNU - Norwegian University of Science and Technology
- *
+/**
+ * @file can_controller.c
+ * @brief file containing functions and struct associated with the CAN controller located in node 2.
+ * @author Gustav O. Often and Eivind H. J�lsgard
  */ 
 
 #include "can_controller.h"
