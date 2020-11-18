@@ -9,6 +9,7 @@
 #include "msg_handler.h"
 
 PID_DATA regulator;
+PID_DATA pid_a;
 
 /**
  * @brief Struct containing the different game modes.

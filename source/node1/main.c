@@ -24,6 +24,7 @@ int main(){
     can_IRS_enable();
 
     game_menu();
+ 
 }
 
 

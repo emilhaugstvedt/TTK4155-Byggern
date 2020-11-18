@@ -13,11 +13,13 @@
 volatile uint8_t button_pressed;
 
 uint8_t hardware_sufficient_change(joystick_t* joy, slider_t* s, joystick_t* last_joy, slider_t* last_slider) {
-    if((s -> button != 0 && button_pressed == 0)
+
+    if((s -> button != 0 && button_pressed == 0) 
     || abs(s -> left - last_slider -> left) > 10
     || abs(s -> right - last_slider -> right) > 10 
     || abs(joy -> val_y - last_joy -> val_y) > 5
     || abs(joy -> val_x - last_joy -> val_x) > 5 ) {
+
 
         if(s -> button != 0 && button_pressed == 1){
             s-> button = 0;
@@ -40,7 +42,11 @@ void hardware_send(joystick_t* joy, slider_t* s, joystick_t* last_joy, slider_t*
     multifunc_joy_get(joy);
     multifunc_slider_get(s);
     multifunc_button_get(s);
-    if(hardware_sufficient_change(joy, s, last_joy, last_slider)) {
+
+    if(hardware_sufficient_change(joy, s, last_joy, last_slider)){
+
+        printf("%d \r\n", s -> button);
+
         can_msg_t msg;
         msg.id = MSG_ID;
         msg.length = 3;
@@ -48,7 +54,7 @@ void hardware_send(joystick_t* joy, slider_t* s, joystick_t* last_joy, slider_t*
         msg.data[MOTOR_DATA] = 255 - s->left; 
         msg.data[SOLENOID] = s->button;
         can_send(&msg);
-     }
+    }
 
      last_joy -> val_x = joy -> val_x;
      last_joy -> val_y = joy -> val_y;
@@ -56,3 +62,10 @@ void hardware_send(joystick_t* joy, slider_t* s, joystick_t* last_joy, slider_t*
      last_slider -> left = s -> left;
      last_slider -> right = s -> right;
 }
+
+/*
+while(1) {
+    multifunc_button_get(s);
+    printf("%d \r\n", s -> button);
+}
+*/

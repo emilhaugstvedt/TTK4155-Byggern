@@ -27,7 +27,7 @@ int main()
 
    can_init_def_tx_rx_mb(CAN_BR_PRESET);
    PID_DATA regulator;
-   //pid_init(&regulator);
+   pid_init(&regulator);
    audio_sensor_init();
 
    PID_DATA pid_a;

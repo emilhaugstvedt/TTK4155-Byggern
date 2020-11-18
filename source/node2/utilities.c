@@ -18,7 +18,7 @@ void util_servo_driver() {
 }
 
 void util_solenoid_driver() {
-    //printf("%d \n\r", util_data.solenoid);
+    printf("%d \n\r", util_data.solenoid);
     //if((util_data.solenoid != 0) && (solenodi_on == 0)){
         //soleniod_init();
 

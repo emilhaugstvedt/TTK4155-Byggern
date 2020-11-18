@@ -15,14 +15,14 @@ void play_game(GAME *game) {
         util_motor_driver(&regulator);
         util_solenoid_driver();
         util_servo_driver();
-        //util_audio_motor_driver(&pid_a);
+        //util_audio_motor_driver(&regulator);
     }
     
 }
 
 uint8_t game_lost() {
     uint32_t data = util_read_ir();
-    printf(" %d \n\r", data);
+    //printf(" %d \n\r", data);
     if (data < 600){
         game_send();
         return 1;
