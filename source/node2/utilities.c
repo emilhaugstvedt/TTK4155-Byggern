@@ -9,33 +9,25 @@
 #define ENCODER_MAX 9000
 #define SLIDER_MAX 255
 
-volatile uint8_t solenodi_on;
+volatile uint8_t solenoid_flag = 1;
 
 
 void util_servo_driver() {
-    //printf("%d \n\r", util_data.servo_data);
     servo_set_duty_cycle(util_data.servo_data);
 }
 
 void util_solenoid_driver() {
-    printf("%d \n\r", util_data.solenoid);
-    //if((util_data.solenoid != 0) && (solenodi_on == 0)){
-        //soleniod_init();
 
-    if(util_data.solenoid != 0) {
+    if(util_data.solenoid != 0 && solenoid_flag == 1) {
         solenoid_on();
-        timer_systick_wait(500);
+        timer_systick_wait(200);
         solenoid_off();
+        solenoid_flag = 0;
     }
-    // solenoid_on();
-    // timer_systick_wait(500);
-    // solenoid_off();
-    // util_data.solenoid = 0;
-    //}
-    //else if(util_data.solenoid == 0)
-    //{
-        //solenodi_on = 0;
-    //}
+    else if (util_data.solenoid == 0) {
+        solenoid_flag = 1;
+    }
+
     
 }
 
@@ -73,35 +65,32 @@ int16_t util_encoder_read() {
 
 void util_motor_driver(PID_DATA * regulator) {
 
-    int16_t reference = util_data.motor_data;
+    if (util_data.new_msg == 1) {
+
+    uint16_t reference = util_data.motor_data;
 
     int16_t measurement = util_encoder_read();
 
     int16_t u = pid_controller(regulator, reference, measurement);
 
     if ((regulator -> cur_error) < 0) {
-        motor_direction(RIGHT);
-        //printf("RIGHT \r");
+            motor_direction(RIGHT);
     }
     else
     {
         motor_direction(LEFT);
-        //printf("LEFT \n\r");
     }
 
     u = (u * 0xFFF) / 255;
-    
-    if (u < 0) {
-        u = -u;
-    }
 
-    //printf("%d %d %d \n\r", reference, measurement, u);
+    if (u < 0) {
+            u = -u;
+    }
 
     dac_send(u);
 
     util_data.new_msg = 0;
-
-
+    }
 }
 
 uint8_t util_read_audio_sensor() {
@@ -111,8 +100,23 @@ uint8_t util_read_audio_sensor() {
 }
 
 void util_audio_motor_driver(PID_DATA * pid_a) {
+
+    if (util_data.new_msg == 1) {
  
-    int16_t reference = adc_read_audio();
+    uint32_t reference = adc_read_audio();
+
+
+    reference = (reference / 6) - 300;
+
+    if(reference < 0) {
+        reference = 0;
+    }
+    if(reference > 255) {
+        reference = 255;
+    }
+
+    printf("%d \n\r", reference);
+
 
     int16_t measurement = util_encoder_read();
 
@@ -120,12 +124,10 @@ void util_audio_motor_driver(PID_DATA * pid_a) {
 
     if ((pid_a -> cur_error) < 0) {
         motor_direction(RIGHT);
-        //printf("RIGHT \r");
     }
     else
     {
         motor_direction(LEFT);
-        //printf("LEFT \n\r");
     }
 
     u = (u * 0xFFF) / 255;
@@ -134,11 +136,10 @@ void util_audio_motor_driver(PID_DATA * pid_a) {
         u = -u;
     }
 
-    //printf("%d %d %d \n\r", reference, measurement, u);
-
     dac_send(u);
 
     util_data.new_msg = 0;
+    }
 }
 
 uint32_t util_read_ir(){

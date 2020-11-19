@@ -15,6 +15,8 @@
 
 volatile uint8_t lost = 0;
 
+volatile uint8_t timer_20_ms = 0;
+
 void game_init() {
     lost = 0;
 }
@@ -41,65 +43,69 @@ void game_play() {
     slider_t s_prev;
     
     while(lost != 1) {
-
-        hardware_send(&j_next, &s_next, &j_prev, &s_prev);
-        
-        //game_update_screen();
+        if(timer_20_ms ==1 ){
+            hardware_send(&j_next, &s_next, &j_prev, &s_prev);
+            timer_20_ms = 0;
+        }
     }
+    lost = 0;
+    menu_lost();
+
 
 }
 
 
-/*void game_audio_play() {
+void game_audio_play() {
+    game_oled_audio();
     game_init();
+    joystick_t joy;
+    multifunc_joy_init(&joy);
+    multifunc_joy_init(&joy);
+    multifunc_joy_get(&joy);
+    multifunc_joy_get_dir(&joy);
 
-    while(game.score != 0) {
-
-        if (game.IR_beam == 0) {
-                game_lives_reduction();
+    while(lost != 1) {
+        multifunc_joy_get(&joy);
+        multifunc_joy_get_dir(&joy);
+        if(timer_20_ms == 1){
+            hardware_send_audio();
+            timer_20_ms = 0;
         }
-        
-        //game_update_screen();
     }
-}*/
 
-
-/*
-void game_fsm (GAME *game) {
-    while (1) {
-        switch (game -> state)
-        {
-        case 1:
-            run_menu( noe inni her burde endre staten til game)
-            break;
-        case 2:
-            game_play()
-        }
-        
-
-
-    }
+    lost = 0;
+    menu_lost();
 }
-*/
 
-ISR(TIMER0_OVF_vect) {
-    
-    TCNT0 = 0xB2;
-}
 
 void game_oled() {
     oled_reset();
     oled_write_string("PLAYING...", 3, 10, 8);
 }
 
+void game_oled_audio() {
+    oled_reset();
+    oled_write_string("WHISTLE...", 3, 10, 8);
+}
+
 /**
- * @brief Interrupt service routine that reads and prints CAN messages. 
+ * @brief Interrupt service routine that reads CAN messages. 
  * 
  * @param INT0_vect interrupt vector zero. 
  */
 ISR(INT0_vect) {
-    printf("LOST");
     can_msg_t msg;
     can_receive(&msg);
     lost = 1;
 }
+
+ISR(TIMER1_OVF_vect) {
+    timer_20_ms = 1;
+	TCNT1 = 12288;   // for 1 sec at 16 MHz 4915200
+}
+
+ 
+//ISR(TIMER3_OVF_vect) {
+//    timer_20_ms = 1;
+//    printf("timer handler");
+//}

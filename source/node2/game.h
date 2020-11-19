@@ -36,7 +36,7 @@ typedef struct game_t {
  * @brief Function containing the games finite state machine. Switches between different states as a result of the game logic in node 1.
  * @param game Pointer to a game ibject. 
  */
-void play_game(GAME *game);
+void play_game();
 
 uint8_t game_lost();
 

@@ -29,6 +29,6 @@ void hardware_send(joystick_t* joy, slider_t *s, joystick_t* last_joy, slider_t 
  */
 uint8_t hardware_sufficient_change(joystick_t* joy, slider_t* s, joystick_t* last_joy, slider_t* last_slider);
 
-direction_t hardware_get_direction(joystick_t* joy);
+void hardware_send_audio();
 
 #endif

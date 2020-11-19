@@ -33,12 +33,7 @@ int main()
    PID_DATA pid_a;
    pid_init(&pid_a);
 
-   while (1)
-   {
-
-      GAME game;
-      game_init(&game);
-      play_game(&game);
-      
+   while (1) {
+      play_game();
    }
 }

@@ -8,6 +8,9 @@
 #include "can_controller.h"
 #include "utilities.h"
 
+volatile uint8_t audio_game;
+volatile uint8_t normal_game;
+
 PID_DATA regulator;
 
 /**

@@ -11,12 +11,12 @@ void game_menu() {
 
     node_t play_game = menu_new_node("PLAY GAME");
     node_t settings = menu_new_node("SETTINGS");
-    node_t highscore = menu_new_node("HIGHSCORE");
+    node_t audio = menu_new_node("WHISPLAY");
     node_t songs = menu_new_node("PLAY A SONG");
 
     menu_add_node(&m, &play_game);
+    menu_add_node(&m, &audio);
     menu_add_node(&m, &settings);
-    menu_add_node(&m, &highscore);
     menu_add_node(&m, &songs);
 
     node_t songs_ole_brum = menu_new_node("OLE BRUM");
@@ -36,10 +36,11 @@ void game_menu() {
     menu_add_child(&songs, &songs_wap);
 
     menu_add_fun_ptr(&play_game, &game_play);
-
-    
+    menu_add_fun_ptr(&audio, &game_audio_play);
 
     joystick_t j;
+    j.dir_x = NEUTRAL;
+    j.dir_y = NEUTRAL;
 
     menu_write(&m);
 
@@ -105,25 +106,18 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
         }
         if((m -> current_choice -> cur_child != NULL || m -> current_choice -> fun_ptr != NULL) && joy->dir_x == RIGHT && flag == 1){
             if(m -> current_choice -> fun_ptr != NULL) {
-                (*m -> current_choice -> fun_ptr)();
-                menu_lost();
-                while(joy -> dir_x != LEFT) {
-                multifunc_joy_get_menu(joy);
-                multifunc_joy_get_dir(joy);
-                }
-                oled_reset();
-                menu_write(m);
+                menu_run_func(m, joy);
             }
             else {
                 m -> current_choice = m -> current_choice -> cur_child;
                 menu_update(m);
             }
             flag = 0;
+        }
         if(m -> current_choice -> parent != NULL && joy -> dir_x == LEFT && flag == 1) {
             m -> current_choice = m -> current_choice -> parent;
             menu_update(m);
             flag = 0;
-        }
         }
     }
 }
@@ -191,4 +185,14 @@ void menu_add_fun_ptr(node_t* node, void (*fun_ptr)(void)){
 void menu_lost() {
     oled_reset();
     oled_write_string("YOU LOST :(", 3, 10, 8);
+}
+
+void menu_run_func(menu_t *m, joystick_t *joy) {
+    (*m -> current_choice -> fun_ptr)();
+    while(joy -> dir_x != LEFT) {
+        multifunc_joy_get_menu(joy);
+        multifunc_joy_get_dir(joy);
+    }
+    oled_reset();
+    menu_write(m);
 }

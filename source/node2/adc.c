@@ -19,7 +19,7 @@ uint32_t adc_read_ir_beam () {
     return data;
 }
 
-uint8_t adc_read_audio() {
-    uint8_t data = ADC -> ADC_CDR[1]; 
+uint32_t adc_read_audio() {
+    uint32_t data = ADC -> ADC_CDR[1];
     return data;
 }

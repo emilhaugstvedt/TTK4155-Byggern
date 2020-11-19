@@ -44,4 +44,8 @@ void game_update_screen(char* score_string, char* lives_string);
 
 void game_oled();
 
+void game_oled_audio();
+
+
+
 #endif

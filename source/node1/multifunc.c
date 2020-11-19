@@ -61,11 +61,11 @@ void multifunc_button_get(slider_t *slide) {
 }
 
 void multifunc_joy_get_dir(joystick_t *joy){
-    if(joy->val_x > 240){
+    if(joy->val_x > 220){
         joy->dir_x = RIGHT;
     }
-    if(joy->val_x < 10){
-        joy->dir_x = LEFT;
+    if(joy->val_x < 30){
+        joy -> dir_x = LEFT;
     }
     if(joy -> val_x < 160 && joy->val_x >100){
         joy->dir_x = NEUTRAL;

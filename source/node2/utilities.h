@@ -14,17 +14,17 @@ PID_DATA regulator;
  * @brief Struct for representing data needed for the game board.
  */
 typedef struct util_data_t {
+    uint8_t audio;
     
     uint8_t motor_data;
     uint8_t servo_data;
     uint8_t util_encoder_read;
     uint8_t solenoid;
-    uint8_t audio;
+
 
     uint8_t new_msg;
 
-    uint16_t dist_right;
-    uint16_t dist_left;
+    uint8_t last_reference;
 
 } UTIL_DATA;
 

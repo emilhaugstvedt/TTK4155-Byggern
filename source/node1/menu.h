@@ -111,5 +111,7 @@ void menu_add_fun_ptr(node_t* node, void (*fun_ptr)(void));
 
 void menu_lost();
 
+void menu_run_func(menu_t *m, joystick_t *joy);
+
 
 #endif

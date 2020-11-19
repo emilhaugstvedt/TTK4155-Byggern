@@ -19,5 +19,5 @@ uint32_t adc_read_ir_beam();
  * @brief Function that reads the pin associated with the audio sensor.
  * @return The data value in the data register.
  */
-uint8_t adc_read_audio();
+uint32_t adc_read_audio();
 #endif

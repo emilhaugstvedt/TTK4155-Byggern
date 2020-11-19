@@ -14,7 +14,6 @@
 #include "can_driver.h"
 
 
-
 int main(){
 
     SRAM_init();
@@ -22,6 +21,8 @@ int main(){
     string_init(MYUBRR);
     can_init();
     can_IRS_enable();
+
+    timer_init();
 
     game_menu();
  
