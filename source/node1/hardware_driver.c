@@ -10,6 +10,7 @@
 #define SERVO_DATA 0
 #define MOTOR_DATA 1
 #define SOLENOID 2
+#define GAME_DONE 3
 
 volatile uint8_t button_pressed;
 
@@ -41,7 +42,6 @@ void hardware_send(joystick_t* joy, slider_t* slider, joystick_t* last_joy, slid
         msg.data[SERVO_DATA] = joy->val_x;
         msg.data[MOTOR_DATA] = 255 - slider->left;
         msg.data[SOLENOID] = slider->button;
-        printf("%d \n\r", msg.data[MOTOR_DATA]);
         can_send(&msg);
 
         last_joy -> val_x = joy -> val_x;
@@ -68,6 +68,13 @@ void hardware_send_audio() {
     can_msg_t msg;
     msg.length = 0;
     msg.id = AUDIO_ID;
+    can_send(&msg);
+}
+
+void hardware_game_done() {
+    can_msg_t msg;
+    msg.length = 0;
+    msg.id = GAME_DONE;
     can_send(&msg);
 }
 

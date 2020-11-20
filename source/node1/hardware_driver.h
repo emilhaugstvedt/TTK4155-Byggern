@@ -31,4 +31,6 @@ uint8_t hardware_sufficient_change(joystick_t* joy, slider_t* s, joystick_t* las
 
 void hardware_send_audio();
 
+void hardware_game_done();
+
 #endif

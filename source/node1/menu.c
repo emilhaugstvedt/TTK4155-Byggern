@@ -107,6 +107,7 @@ void menu_fsm(menu_t *m, joystick_t *joy) {
         if((m -> current_choice -> cur_child != NULL || m -> current_choice -> fun_ptr != NULL) && joy->dir_x == RIGHT && flag == 1){
             if(m -> current_choice -> fun_ptr != NULL) {
                 menu_run_func(m, joy);
+                hardware_game_done();
             }
             else {
                 m -> current_choice = m -> current_choice -> cur_child;

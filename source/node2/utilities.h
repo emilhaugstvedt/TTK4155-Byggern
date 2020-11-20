@@ -15,6 +15,7 @@ PID_DATA regulator;
  */
 typedef struct util_data_t {
     uint8_t audio;
+    uint8_t game_done;
     
     uint8_t motor_data;
     uint8_t servo_data;

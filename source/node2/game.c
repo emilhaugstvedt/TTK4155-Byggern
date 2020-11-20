@@ -14,15 +14,14 @@ void game_init(GAME *game) {
 }
 
 void play_game() {
-    printf("%d \n\r", audio_game);
-    if (audio_game == 0) {
+    if (audio_game == 0 && util_data.game_done != 1) {
         while (game_lost() != 1){
             util_motor_driver(&regulator);
             util_solenoid_driver();
             util_servo_driver();
         }
     }
-    if (audio_game == 1) {
+    if (audio_game == 1 && util_data.game_done != 1) {
         while (game_lost() != 1){
             util_audio_motor_driver(&regulator);
         }
