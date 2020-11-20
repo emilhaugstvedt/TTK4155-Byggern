@@ -109,8 +109,18 @@ void menu_print();
  */
 void menu_add_fun_ptr(node_t* node, void (*fun_ptr)(void));
 
+/**
+ * @brief Function writing "YOU LOST :(" to the screen.
+ * 
+ */
 void menu_lost();
 
+/**
+ * @brief Function for running function pointers.
+ * 
+ * @param m menu object
+ * @param joy joystick objekt
+ */
 void menu_run_func(menu_t *m, joystick_t *joy);
 
 

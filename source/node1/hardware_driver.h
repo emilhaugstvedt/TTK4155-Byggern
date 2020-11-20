@@ -29,8 +29,16 @@ void hardware_send(joystick_t* joy, slider_t *s, joystick_t* last_joy, slider_t 
  */
 uint8_t hardware_sufficient_change(joystick_t* joy, slider_t* s, joystick_t* last_joy, slider_t* last_slider);
 
+/**
+ * @brief Telling node 2 that the game mode is audio mode
+ * 
+ */
 void hardware_send_audio();
 
+/**
+ * @brief Telling node 2 that the game is finished from node 1.
+ * 
+ */
 void hardware_game_done();
 
 #endif

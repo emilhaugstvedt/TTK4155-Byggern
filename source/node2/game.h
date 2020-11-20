@@ -38,10 +38,17 @@ typedef struct game_t {
  */
 void play_game();
 
+/**
+ * @brief Function checing if the game is lost or not by reading the ir beam
+ * 
+ * @return uint8_t 
+ */
 uint8_t game_lost();
 
+/**
+ * @brief Function sending informationn about the game to noe 1.
+ * 
+ */
 void game_send();
-
-void game_init(GAME *game);
 
 #endif

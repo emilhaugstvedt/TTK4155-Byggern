@@ -42,8 +42,16 @@ void game_audio_play();
  */
 void game_update_screen(char* score_string, char* lives_string);
 
+/**
+ * @brief Updating the oled to the playing screen
+ * 
+ */
 void game_oled();
 
+/**
+ * @brief Updating the oled to the playing screen for whistle mode.
+ * 
+ */
 void game_oled_audio();
 
 
